@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/bg_gray"
+    android:orientation="vertical" >
+
+    <include layout="@layout/common_title" />
+
+    <ScrollView
+        android:id="@+id/sv_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="@dimen/y10"
+                android:background="@android:color/darker_gray" />
+            <!-- 包裹用户信息以及悬赏金额 -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/x10"
+                android:paddingRight="@dimen/x10" >
+
+                <!-- 包裹用户信息 -->
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <!-- 头像 -->
+
+                    <ImageView
+                        android:id="@+id/iv_questioner_head"
+                        android:layout_width="@dimen/x40"
+                        android:layout_height="@dimen/y40"
+                        android:src="@drawable/head" />
+                    <!-- 姓名性别 -->
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x5"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/tv_questioner_name"
+                            style="@style/font1_gray_normal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="陈岸涛"
+                            android:textColor="@android:color/holo_blue_light" />
+
+                        <TextView
+                            android:id="@+id/tv_questioner_gender"
+                            style="@style/font1_gray_normal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="男" />
+                    </LinearLayout>
+                </LinearLayout>
+                <!-- 悬赏 -->
+
+                <TextView
+                    android:id="@+id/tv_reward_amount"
+                    style="@style/font2_black_normal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x75"
+                    android:layout_weight="1"
+                    android:text="悬赏(250￥)"
+                    android:textColor="@android:color/holo_green_dark" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="@dimen/y5"
+                android:background="@android:color/darker_gray" />
+
+            <!-- 问题标题 -->
+
+            <TextView
+                android:id="@+id/tv_question_title"
+                style="@style/font2_black_normal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x5"
+                android:layout_marginTop="@dimen/y5"
+                android:text="如何装逼才能不会被人揭穿" />
+
+            <!-- 问题内容 -->
+
+            <TextView
+                android:id="@+id/tv_question_content"
+                style="@style/font1_gray_normal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x5"
+                android:layout_marginRight="@dimen/x5"
+                android:layout_marginTop="@dimen/y5"
+                android:text="请教各位大神，最近在朋友面前装逼老是被揭穿，求教如何装逼才不会被人揭穿，程序猿怎么装逼，怎么装逼才能像程序猿？？！！！" />
+
+            <!-- 问题中的图片和语音 -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y5"
+                android:orientation="horizontal"
+                android:visibility="visible" >
+
+                <!-- 图片 -->
+
+                <LinearLayout
+                    android:id="@+id/ll_question_image"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y5"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:visibility="gone" >
+
+                    <ImageView
+                        android:layout_width="@dimen/x30"
+                        android:layout_height="@dimen/y30"
+                        android:layout_marginLeft="@dimen/x10" />
+
+                    <ImageView
+                        android:layout_width="@dimen/x30"
+                        android:layout_height="@dimen/y30"
+                        android:layout_marginLeft="@dimen/x10" />
+
+                    <ImageView
+                        android:layout_width="@dimen/x30"
+                        android:layout_height="@dimen/y30"
+                        android:layout_marginLeft="@dimen/x10" />
+                </LinearLayout>
+                <!-- 语音 -->
+
+                <LinearLayout
+                    android:id="@+id/ll_question_voice"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y5"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:visibility="gone" >
+
+                    <ImageView
+                        android:layout_width="@dimen/x30"
+                        android:layout_height="@dimen/y30"
+                        android:layout_marginLeft="@dimen/x10"
+                        android:src="@android:drawable/ic_btn_speak_now" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- 问题发布时间 -->
+
+            <TextView
+                android:id="@+id/tv_question_postTime"
+                style="@style/font1_gray_normal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x5"
+                android:layout_marginRight="@dimen/x5"
+                android:layout_marginTop="@dimen/y10"
+                android:gravity="right"
+                android:text="2015-5-26" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="@dimen/y10"
+                android:background="@android:color/darker_gray" />
+            <!-- 快捷操作栏(关注，回复)等 -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/x5" >
+
+                <ImageView
+                    android:layout_width="@dimen/x20"
+                    android:layout_height="@dimen/y20"
+                    android:src="@android:drawable/star_big_on" />
+
+                <TextView
+                    android:id="@+id/tv_follow"
+                    style="@style/font1_black_normal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="关注" />
+
+                <ImageView
+                    android:layout_width="@dimen/x20"
+                    android:layout_height="@dimen/y20"
+                    android:layout_marginLeft="@dimen/x5"
+                    android:src="@android:drawable/ic_menu_edit" />
+
+                <TextView
+                    android:id="@+id/tv_answer_questioner"
+                    style="@style/font1_black_normal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="回复" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="@dimen/y1"
+                android:background="@android:color/darker_gray" />
+
+            <!-- 最佳答案 -->
+
+            <LinearLayout
+                android:id="@+id/ll_best_answer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x1"
+                android:layout_marginRight="@dimen/x1"
+                android:layout_marginTop="@dimen/y5"
+                android:background="@drawable/diliver"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/x5"
+                android:paddingRight="@dimen/x5" >
+
+                <!-- 包裹回答者信息和最佳答案 -->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/bg_gray" >
+
+                    <!-- 头像和姓名 -->
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal" >
+
+                        <!-- 头像 -->
+
+                        <ImageView
+                            android:id="@+id/iv_best_answer_head"
+                            android:layout_width="@dimen/x40"
+                            android:layout_height="@dimen/y40"
+                            android:src="@drawable/head" />
+                        <!-- 姓名 -->
+
+                        <TextView
+                            android:id="@+id/tv_best_answer_name"
+                            style="@style/font1_gray_normal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/x5"
+                            android:text="潘晴"
+                            android:textColor="@android:color/holo_blue_light" />
+                    </LinearLayout>
+                    <!-- 最佳答案 -->
+
+                    <LinearLayout
+                        android:background="@color/bg_gray"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal" >
+
+                        <ImageView
+                            android:layout_width="@dimen/x35"
+                            android:layout_height="@dimen/y35"
+                            android:src="@android:drawable/btn_star_big_on" />
+
+                        <TextView
+                            style="@style/font2_black_normal"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="4"
+                            android:text="最佳答案"
+                            android:textColor="@android:color/holo_green_dark" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- 回答内容 -->
+
+                <TextView
+                    android:id="@+id/tv_best_answer_content"
+                    style="@style/font1_gray_normal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y5"
+                    android:text="程序猿还装什么逼,赶紧醒醒搬砖爬树去,天天到晚做什么白日梦,自己选择的猿,含着泪也要爬完" />
+                <!-- 回答时间 -->
+
+                <TextView
+                    android:id="@+id/tv_best_answer_postTime"
+                    style="@style/font1_gray_normal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y10"
+                    android:gravity="right"
+                    android:text="2015-5-26" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginTop="@dimen/y10"
+                    android:background="@android:color/darker_gray" />
+                <!-- 赞，鄙视 -->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y2"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/x5" >
+
+                    <ImageView
+                        android:layout_width="@dimen/x20"
+                        android:layout_height="@dimen/y20"
+                        android:src="@drawable/praise" />
+
+                    <TextView
+                        android:id="@+id/tv_best_answer_praise"
+                        style="@style/font1_black_normal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="(250)"
+                        android:textColor="@android:color/holo_green_dark" />
+
+                    <ImageView
+                        android:layout_width="@dimen/x20"
+                        android:layout_height="@dimen/y20"
+                        android:layout_marginLeft="@dimen/x5"
+                        android:src="@drawable/despise" />
+
+                    <TextView
+                        android:id="@+id/tv_best_answer_despise"
+                        style="@style/font1_black_normal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="(250)"
+                        android:textColor="@android:color/holo_red_light" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <com.handmark.pulltorefresh.library.PullToRefreshListView
+                android:id="@+id/lv_answer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y5"
+                android:divider="@android:color/darker_gray"
+                android:dividerHeight="@dimen/y1" >
+            </com.handmark.pulltorefresh.library.PullToRefreshListView>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

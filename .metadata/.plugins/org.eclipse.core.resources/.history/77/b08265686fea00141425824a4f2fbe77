@@ -1,0 +1,6 @@
+package com.cataipq.text;
+
+public class D extends B
+{
+
+}

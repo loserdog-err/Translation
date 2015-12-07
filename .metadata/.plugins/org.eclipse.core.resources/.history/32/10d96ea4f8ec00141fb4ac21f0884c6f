@@ -1,0 +1,64 @@
+package com.cataipq.main;
+
+import android.app.ActionBar;
+import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
+import android.app.ActionBar.Tab;
+import android.net.wifi.p2p.WifiP2pManager.ActionListener;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.TabHost.OnTabChangeListener;
+
+public class MainActivity extends Activity implements ActionBar.TabListener
+{
+	ActionBar actionBar;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState)
+	{
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+		actionBar = getActionBar();
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+		actionBar
+				.addTab(actionBar.newTab().setText("第一页").setTabListener(this));
+		actionBar
+		.addTab(actionBar.newTab().setText("第二页").setTabListener(this));
+		actionBar
+		.addTab(actionBar.newTab().setText("第三页").setTabListener(this));
+		
+		
+	}
+	
+	@Override
+	public void onTabSelected(Tab tab, FragmentTransaction ft)
+	{
+		Fragment fragment=new FragmentDummy();
+		Bundle args= new Bundle();
+		args.putInt(FragmentDummy.NUMBER, tab.getPosition()+1);
+		fragment.setArguments(args);
+		
+		FragmentTransaction fragmentTransaction=getFragmentManager().beginTransaction();
+		fragmentTransaction.replace(R.id.container, fragment);
+		fragmentTransaction.commit();
+		
+		
+		
+	}
+
+	@Override
+	public void onTabUnselected(Tab tab, FragmentTransaction ft)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onTabReselected(Tab tab, FragmentTransaction ft)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+}

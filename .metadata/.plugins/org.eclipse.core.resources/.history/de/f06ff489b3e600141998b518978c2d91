@@ -1,0 +1,74 @@
+package com.caataipq.dao;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.cataipq.bean.Person;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+
+public class PersonDao
+{
+	private PersonSQLiteOpenHelper helper;
+	private SQLiteDatabase db;
+	public PersonDao(Context context)
+	{
+		helper=new PersonSQLiteOpenHelper(context);
+//		 ;
+	}
+	
+	public void add(String name)
+	{	
+		db=helper.getWritableDatabase();
+		ContentValues values=new ContentValues();
+		values.put("name", name);
+		db.insert("person",null , values);
+		db.close();
+	}
+	
+	public void delete(int id)
+	{
+		db=helper.getWritableDatabase();
+		db.delete("person", "id=?",new String[]{id+""});
+		db.close();
+	}
+	
+	public void update(int id,String name)
+	{
+		db=helper.getWritableDatabase();
+		ContentValues values=new ContentValues();
+		values.put("name", name);
+		db.update("person", values, "id=?", new String[]{id+""});
+		db.close();
+	}
+	
+	public boolean find(int id)
+	{
+		db=helper.getWritableDatabase();
+		Cursor cursor=db.query("person", null, "id=?", new String[]{id+""}, null, null, null);
+		boolean result=cursor.moveToNext();
+		return result;
+	}
+	
+	public List<Person> findAll()
+	{
+		List<Person> list=new ArrayList<>();
+		Person person=null;
+		db=helper.getWritableDatabase();
+		Cursor cursor=db.query("person", null, null, null, null, null, null);
+		while(cursor.moveToNext())
+		{
+			String name=cursor.getString(cursor.getColumnIndex("name"));
+			int id=cursor.getInt(cursor.getColumnIndex("id"));
+			person=new Person(id, name);
+			list.add(person);
+		}
+		return list;
+	}
+	
+	
+}

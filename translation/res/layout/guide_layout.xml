@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_guide"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </android.support.v4.view.ViewPager>
+
+    <LinearLayout
+        android:id="@+id/ll_guide"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="@dimen/y5"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/iv_first"
+            android:layout_width="@dimen/x20"
+            android:layout_height="@dimen/y15"
+            android:src="@drawable/guide_indicate_selected"/>
+
+        <ImageView
+            android:id="@+id/iv_second"
+            android:layout_width="@dimen/x20"
+            android:layout_height="@dimen/y15"
+            android:src="@drawable/guide_indicate_unselected"/>
+    </LinearLayout>
+
+    <com.gc.materialdesign.views.ButtonRectangle
+        android:visibility="invisible"
+        android:layout_above="@id/ll_guide"
+        android:id="@+id/btn_go"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_width="@dimen/x200"
+        android:layout_marginBottom="@dimen/y20"
+        android:layout_height="@dimen/y40"
+        android:background="#ffe54d4a"
+        android:onClick="go"
+        android:text="开启征程"/>
+
+
+</RelativeLayout>

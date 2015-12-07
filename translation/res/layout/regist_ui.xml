@@ -1,0 +1,147 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/regist_background"
+              android:orientation="vertical">
+
+    <include layout="@layout/regist_title"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/x30"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <!-- 用户名 -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y40"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/x30"
+                android:layout_height="@dimen/y30"
+                android:layout_gravity="center_vertical"
+                android:src="@android:drawable/ic_menu_myplaces"/>
+
+            <com.gdxz.zhongbao.client.view.customView.MyEditText
+                android:id="@+id/et_username"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y40"
+                android:hint="用户名5～10位"/>
+        </LinearLayout>
+
+        <!-- 密码 -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y40"
+            android:layout_marginTop="@dimen/y10"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/x30"
+                android:layout_height="@dimen/y30"
+                android:layout_gravity="center_vertical"
+                android:src="@android:drawable/ic_lock_lock"/>
+
+            <com.gdxz.zhongbao.client.view.customView.MyEditText
+                android:id="@+id/et_password"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y40"
+                android:hint="密码6～14位"/>
+        </LinearLayout>
+
+        <!-- 重复密码 -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y40"
+            android:layout_marginTop="@dimen/y10"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/x30"
+                android:layout_height="@dimen/y30"
+                android:layout_gravity="center_vertical"
+                android:src="@android:drawable/ic_lock_lock"/>
+
+            <com.gdxz.zhongbao.client.view.customView.MyEditText
+                android:id="@+id/et_rePassword"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y40"
+                android:hint="重复密码6～14位"/>
+        </LinearLayout>
+
+        <!-- 手机号 -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y40"
+            android:layout_marginTop="@dimen/y10"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/x30"
+                android:layout_height="@dimen/y30"
+                android:layout_gravity="center_vertical"
+                android:src="@android:drawable/ic_menu_call"/>
+
+            <com.gdxz.zhongbao.client.view.customView.MyEditText
+                android:id="@+id/et_mobiephone"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y40"
+                android:hint="11位手机号"/>
+        </LinearLayout>
+
+        <!-- 邮箱 -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y40"
+            android:layout_marginTop="@dimen/y10"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/x30"
+                android:layout_height="@dimen/y30"
+                android:layout_gravity="center_vertical"
+                android:src="@android:drawable/ic_dialog_email"/>
+
+            <com.gdxz.zhongbao.client.view.customView.MyEditText
+                android:id="@+id/et_email"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y40"
+                android:hint="邮箱"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_errorInfo"
+            style="@style/font2_white_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/holo_red_dark"/>
+
+        <com.gc.materialdesign.views.ButtonRectangle
+            android:id="@+id/button"
+            android:layout_width="@dimen/x300"
+            android:layout_height="@dimen/y40"
+            android:background="#1E88E5"
+            android:onClick="register"
+            android:text="注册"/>
+        <!--<Button-->
+        <!--style="@style/font2_black_normal"-->
+        <!--android:layout_width="@dimen/y300"-->
+        <!--android:layout_height="@dimen/y30"-->
+        <!--android:layout_gravity="center_horizontal"-->
+        <!--android:layout_marginTop="@dimen/y10"-->
+        <!--android:background="@drawable/btn_change"-->
+        <!--android:onClick="regist"-->
+        <!--android:text="注册"-->
+        <!--android:textSize="20dp" />-->
+    </LinearLayout>
+
+</LinearLayout>

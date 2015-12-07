@@ -1,0 +1,6 @@
+com.android.ide.eclipse.adt.customDebugKeyStore=E\:\\android\\weibo_android_sdk-master\\weibo_android_sdk-master\\debug.keystore
+com.android.ide.eclipse.adt.fixLegacyEditors=1
+com.android.ide.eclipse.adt.sdk=E\:\\android\\android-sdk_r20-windows\\android-sdk-windows
+com.android.ide.eclipse.adt.xmlEditor=true
+design.structure.flyout.width=170
+eclipse.preferences.version=1

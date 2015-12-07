@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--font0-->
+    <style name="font0_white_bold">
+        <item name="android:textSize">@dimen/x10</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="font0_white_normal">
+        <item name="android:textSize">@dimen/x10</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="font0_black_bold">
+        <item name="android:textSize">@dimen/x10</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="font0_black_normal">
+        <item name="android:textSize">@dimen/x10</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="font0_gray_bold">
+        <item name="android:textSize">@dimen/x10</item>
+        <item name="android:textColor">#ff8b8b8b</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="font0_gray_normal">
+        <item name="android:textSize">@dimen/x10</item>
+        <item name="android:textColor">#ff8b8b8b</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+    <!-- font1 -->
+    <style name="font1_white_bold">
+        <item name="android:textSize">@dimen/x12</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="font1_white_normal">
+        <item name="android:textSize">@dimen/x12</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="font1_black_bold">
+        <item name="android:textSize">@dimen/x12</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="font1_black_normal">
+        <item name="android:textSize">@dimen/x12</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="font1_gray_bold">
+        <item name="android:textSize">@dimen/x12</item>
+        <item name="android:textColor">#ff8b8b8b</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="font1_gray_normal">
+        <item name="android:textSize">@dimen/x12</item>
+        <item name="android:textColor">#ff8b8b8b</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <!-- font2 -->
+    <style name="font2_white_bold">
+        <item name="android:textSize">@dimen/x16</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="font2_white_normal">
+        <item name="android:textSize">@dimen/x16</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="font2_black_bold">
+        <item name="android:textSize">@dimen/x16</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="font2_black_normal">
+        <item name="android:textSize">@dimen/x16</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="font2_gray_bold">
+        <item name="android:textSize">@dimen/x16</item>
+        <item name="android:textColor">#ff8b8b8b</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="font2_gray_normal">
+        <item name="android:textSize">@dimen/x16</item>
+        <item name="android:textColor">#ff8b8b8b</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <!-- font3 -->
+    <style name="font3_white_bold">
+        <item name="android:textSize">@dimen/x18</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="font3_white_normal">
+        <item name="android:textSize">@dimen/x18</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="font3_black_bold">
+        <item name="android:textSize">@dimen/x18</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="font3_black_normal">
+        <item name="android:textSize">@dimen/x18</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="font3_gray_bold">
+        <item name="android:textSize">@dimen/x18</item>
+        <item name="android:textColor">#ff8b8b8b</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="font3_gray_normal">
+        <item name="android:textSize">@dimen/x18</item>
+        <item name="android:textColor">#ff8b8b8b</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+</resources>

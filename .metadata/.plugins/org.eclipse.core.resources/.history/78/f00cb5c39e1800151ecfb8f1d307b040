@@ -1,0 +1,110 @@
+package com.gdxz.zhongbao.client.view.fragment;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+
+import com.gdxz.zhongbao.client.Service.QuestionService;
+import com.gdxz.zhongbao.client.Service.impl.QuestionServiceImpl;
+import com.gdxz.zhongbao.client.common.CommonAdapter;
+import com.gdxz.zhongbao.client.common.ViewHolder;
+import com.gdxz.zhongbao.client.domain.Question;
+import com.gdxz.zhongbao.client.view.activity.HomeActivity;
+import com.gdxz.zhongbao.client.view.activity.MainActivity;
+import com.gdxz.zhongbao.client.view.activity.R;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
+
+import android.app.ProgressDialog;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ExpandableListView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class HomeNewlyQuestionFragment extends LazyFragment
+{
+
+	// 标记当前在第几页
+	public int pageNow = 1;
+
+	// 标志位，标志已经初始化完成。
+	private boolean isPrepared;
+
+	@Override
+	public void onCreate(Bundle savedInstanceState)
+	{
+		// 初始化数据
+		super.onCreate(savedInstanceState);
+	}
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState)
+	{
+		inflater = getActivity().getLayoutInflater();
+		View wrapper = inflater.inflate(R.layout.home_question_ui, container, false);
+		mPullRefreshListView = (PullToRefreshListView) wrapper
+				.findViewById(R.id.lv_item);
+		mPullRefreshListView.setMode(Mode.BOTH);
+		mPullRefreshListView.setScrollingWhileRefreshingEnabled(true);
+		// 监听列表被刷新时事件.
+		mPullRefreshListView
+				.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>()
+				{
+
+					@Override
+					public void onPullDownToRefresh(
+							PullToRefreshBase<ListView> refreshView)// 下拉刷新
+					{
+						pageNow = 1;
+						questionService.loadQuestionData(handler, pageNow + "",
+								HomeActivity.NEWLY_QUESTION + "",
+								HomeActivity.REFRESH_DATA, mPullRefreshListView);
+					}
+
+					@Override
+					public void onPullUpToRefresh(
+							PullToRefreshBase<ListView> refreshView)// 下拉加载数据
+					{
+						// pageNow+=1;
+						questionService.loadQuestionData(handler, (pageNow += 1)
+								+ "", HomeActivity.NEWLY_QUESTION + "",
+								HomeActivity.ADD_MORE_DATA, mPullRefreshListView);
+					}
+
+				});
+
+		isPrepared = true;
+		lazyLoad();
+		//
+		return wrapper;
+	}
+
+	@Override
+	protected void lazyLoad()
+	{
+		if (!isPrepared || !isVisible)
+		{
+			return;
+		}
+		pageNow = 1;
+		totalItem=0;
+		mPullRefreshListView.setMode(Mode.BOTH);
+		mPullRefreshListView.setScrollingWhileRefreshingEnabled(true);
+		showProgressDialog("最新提问");
+		questionService.loadQuestionData(handler, pageNow + "",
+				HomeActivity.NEWLY_QUESTION + "", HomeActivity.REFRESH_DATA,
+				mPullRefreshListView);
+	}
+}

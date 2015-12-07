@@ -1,0 +1,14 @@
+package com.cataipq.text;
+
+import java.io.File;
+import java.io.FileOutputStream;
+
+public class A
+{
+
+	public static void main(String[] args)
+	{
+		FileOutputStream fos=new FileOutputStream(new File("D:/text/text.txt"));
+		fos.write(1);
+	}
+}

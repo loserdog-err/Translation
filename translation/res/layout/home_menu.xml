@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="wrap_content"
+              android:background="@drawable/home_background"
+              android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/y5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_marginLeft="@dimen/x15">
+
+        <com.gdxz.zhongbao.client.view.customView.RoundImageView
+            android:id="@+id/iv_head"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/head"/>
+
+        <TextView
+            android:id="@+id/tv_username"
+            style="@style/font1_white_normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x15"
+            android:text="陈岸涛"/>
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/lv_menu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/y15"
+        android:layout_marginLeft="@dimen/x20">
+    </ListView>
+
+</LinearLayout>

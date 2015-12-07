@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+
+<hibernate-mapping package="com.gdxz.zhongbao.server.domain">
+
+ <class name="Question" dynamic-insert="true" table="question">
+
+  <id name="id">
+   <generator class="native" />
+  </id>
+
+  <property name="content" type="string"></property>
+  <property name="title" type="string" length="30" />
+  <property name="postTime" type="timestamp" />
+
+  <property name="replyCount" type="integer" />
+  <property name="rewardAmount" type="integer" />
+  <property name="browseCount" type="integer" />
+  <property name="todayReplyChange" type="integer" />
+
+  <property name="isSolve" type="boolean" />
+
+  <!--author属性，本类与User类多对一的映射关系 -->
+  <many-to-one name="author" class="User" column="userId" lazy="false"></many-to-one>
+
+  <!--answers属性，本类与Answer类 一对多的映射关系 -->
+  <!-- <set name="answers" inverse="true" order-by="postTime desc" lazy="false">
+   <key column="questionId"></key>
+   <one-to-many class="Answer" />
+  </set> -->
+
+  <!-- category属性，本类与Category多对一的映射关系 -->
+  <!-- <many-to-one name="category" class="Category" column="categoryId"></many-to-one> -->
+
+ </class>
+
+</hibernate-mapping>

@@ -1,0 +1,133 @@
+package com.gdxz.zhongbao.client.view.activity;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.gdxz.zhongbao.client.common.CommonAdapter;
+import com.gdxz.zhongbao.client.common.ViewHolder;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.View;
+import android.view.Window;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class PersonalSettingActivity extends Activity
+{
+
+	private TextView tvTitle;
+
+	private List<Map<String, String>> items;
+
+	private ListView normalListView;
+
+	private ListView dynamicListView;
+
+	// 定义一个数组存放listview的item文本
+	private String[] tvNormalTitle = { "心情", "用户积分", "详细信息" };
+
+	// 定义一个数组存放listview的item的第二个文本
+	private String[] tvNormalInfo = { "心中一万只草泥马奔过", "250", "" };
+
+	private String[] tvDynamicTitle = { "全部动态", "我的回答", "我的提问", "我的收藏" };
+	private String[] tvDynamicInfo = { "", "", "", "" };
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState)
+	{
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		setContentView(R.layout.personal_setting_ui);
+		init();
+	}
+
+	public void init()
+	{
+		tvTitle = (TextView) findViewById(R.id.tv_title);
+		tvTitle.setText("个人中心");
+		initNormalListView();
+		initDynamicListView();
+	}
+
+	// 初始化基本信息listview
+	public void initNormalListView()
+	{
+
+		items = new ArrayList<>();
+		normalListView = (ListView) findViewById(R.id.lv_normal);
+		for (int i = 0; i < tvNormalInfo.length; i++)
+		{
+			Map<String, String> item = new HashMap<>();
+			item.put("tvNormalTitle", tvNormalTitle[i]);
+			item.put("tvNormalInfo", tvNormalInfo[i]);
+			items.add(item);
+			item = null;
+		}
+		normalListView.setAdapter(new CommonAdapter<Map<String, String>>(
+				getApplicationContext(), items, R.layout.personl_setting_item)
+		{
+			@Override
+			public void convert(ViewHolder helper, Map<String, String> item,
+					int position)
+			{
+				TextView tvNormalTitle = helper.getView(R.id.tv_item_title);
+				tvNormalTitle.setText(item.get("tvNormalTitle"));
+				TextView tvNormalInfo = helper.getView(R.id.tv_item_info);
+				tvNormalInfo.setText(item.get("tvNormalInfo"));
+			}
+		});
+		items = null;
+	}
+
+	// 初始化动态类信息listview
+	public void initDynamicListView()
+	{
+		items = new ArrayList<>();
+		dynamicListView = (ListView) findViewById(R.id.lv_dynamic);
+		for (int i = 0; i < tvDynamicTitle.length; i++)
+		{
+			Map<String, String> item = new HashMap<>();
+			item.put("tvDynamicTitle", tvDynamicTitle[i]);
+			item.put("tvDynamicInfo", tvDynamicInfo[i]);
+			items.add(item);
+			item = null;
+		}
+		dynamicListView.setAdapter(new CommonAdapter<Map<String, String>>(
+				getApplicationContext(), items, R.layout.personl_setting_item)
+		{
+			@Override
+			public void convert(ViewHolder helper, Map<String, String> item,
+					int position)
+			{
+				LinearLayout wraper = (LinearLayout) (helper.getConvertView());
+				
+				TextView tvDynamicTitle = helper.getView(R.id.tv_item_title);
+				tvDynamicTitle.setText(item.get("tvDynamicTitle"));
+				tvDynamicTitle.setLayoutParams(new LinearLayout.LayoutParams(0,
+						LinearLayout.LayoutParams.WRAP_CONTENT, 10.0f));
+				// 移除textview
+				TextView tvDynamicInfo = helper.getView(R.id.tv_item_info);
+				wraper.removeView(tvDynamicInfo);
+				// 增加ImageView
+				ImageView icon = new ImageView(PersonalSettingActivity.this);
+				icon.setLayoutParams(new LinearLayout.LayoutParams(0,
+						LinearLayout.LayoutParams.WRAP_CONTENT, 1.0f));
+				icon.setImageDrawable(getResources().getDrawable(
+						android.R.drawable.ic_media_play));
+				((LinearLayout) (helper.getConvertView())).addView(icon);
+//				System.out.println("position: " + position);
+//				System.out.println("size:"+wraper.getChildCount());
+
+			}
+		});
+		items = null;
+
+	}
+}

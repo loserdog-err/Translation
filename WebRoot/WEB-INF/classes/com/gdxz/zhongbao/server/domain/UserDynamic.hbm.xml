@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+
+<hibernate-mapping package="com.gdxz.zhongbao.server.domain">
+
+ <class name="UserDynamic" dynamic-insert="true" table="userDynamic">
+
+  <id name="id">
+   <generator class="native" />
+  </id>
+
+
+  <property name="type" type="integer" />
+  <property name="updateTime"  type="timestamp"></property>
+
+  <!--question属性，本类与Question多对一的映射关系 -->
+  <many-to-one name="question" class="Question" column="questionId" cascade="all"
+   lazy="false" />
+  <!--answer属性，本类与Answer多对一的映射关系 -->
+  <many-to-one name="answer" class="Answer" column="answerId" cascade="all"
+   lazy="false" />
+  <!--user属性，本类与User多对一的映射关系 -->
+  <many-to-one name="user" class="User" column="userId" lazy="false" cascade="all"></many-to-one>
+
+
+ </class>
+
+</hibernate-mapping>

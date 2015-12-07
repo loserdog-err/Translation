@@ -1,0 +1,108 @@
+package com.cataipq.main;
+
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+import android.support.v7.app.ActionBarActivity;
+import android.text.TextUtils;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
+
+public class MainActivity extends ActionBarActivity
+{
+
+	private final static int ACCESS_ERROR = 0;
+	private final static int MESSAGE = 1;
+	private EditText etUsername;
+	private EditText etPassword;
+	private Handler handler = new Handler()
+	{
+		@Override
+		public void handleMessage(Message msg)
+		{
+			switch (msg.what) {
+			case ACCESS_ERROR:
+				Toast.makeText(MainActivity.this, "访问失败", 1);
+				break;
+			case MESSAGE:
+				Toast.makeText(MainActivity.this, (String)msg.obj,1).show();
+			default:
+				break;
+			}
+		}
+	};
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState)
+	{
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+		etUsername = (EditText) findViewById(R.id.et_username);
+		etPassword = (EditText) findViewById(R.id.et_password);
+	}
+
+	public void login(View view)
+	{
+		final String username = etUsername.getText().toString().trim();
+		final String password = etPassword.getText().toString().trim();
+		if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password))
+		{
+			Toast.makeText(this, "用户名或密码不能为空", 1);
+		} else
+		{
+			new Thread()
+			{
+				public void run()
+				{
+					try
+					{
+						URL url = new URL(
+								"http://192.168.188.73:8080/Login/UserServlet");
+						HttpURLConnection connection = (HttpURLConnection) url
+								.openConnection();
+						connection.setConnectTimeout(1000 * 5);
+						connection.setRequestMethod("POST");
+						connection
+								.setRequestProperty("User-Agent",
+										"Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; WOW64; Trident/6.0)");
+						connection.setRequestProperty("Content-Type",
+								"application/x-www-form-urlencoded");
+						
+						String data="username="+username+"&&password="+password;
+						connection.setDoOutput(true);
+						OutputStream os=connection.getOutputStream();
+						os.write(data.getBytes());
+						int code=connection.getResponseCode();
+						System.out.println(code);
+						if(code==200)
+						{
+							String result=StringUtils.getInputStream2String(connection.getInputStream());
+							if(result!=null)
+							{
+								Message msg=new Message();
+								msg.what=MESSAGE;
+								msg.obj=result;
+								handler.sendMessage(msg);
+							}
+						}
+					} catch (Exception e)
+					{
+						e.printStackTrace();
+						Message msg = new Message();
+						msg.what = ACCESS_ERROR;
+						handler.sendMessage(msg);
+					}
+
+				};
+			}.start();
+		}
+
+	}
+}

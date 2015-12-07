@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y30"
+                android:background="@drawable/title_bg">
+
+    <TextView
+        android:id="@+id/tv_openMenu"
+        style="@style/font1_white_bold"
+        android:layout_width="@dimen/x80"
+        android:layout_height="@dimen/y30"
+        android:drawableLeft="@android:drawable/ic_menu_compass"
+        android:gravity="center_vertical"
+        android:layout_centerVertical="true"
+        android:text="菜单"
+        android:textColor="#ffffff"/>
+
+    <TextView
+        android:layout_centerInParent="true"
+        style="@style/font1_white_bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x60"
+        android:text="首页"/>
+
+    <ImageView
+        android:layout_centerVertical="true"
+        android:id="@+id/remind"
+        android:layout_alignParentRight="true"
+        android:layout_width="@dimen/x20"
+        android:layout_height="@dimen/y15"
+        android:background="@drawable/change_selector"
+        android:layout_marginRight="@dimen/x5"
+        android:src="@drawable/no_remind"/>
+
+</RelativeLayout>

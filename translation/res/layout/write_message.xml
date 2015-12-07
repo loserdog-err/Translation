@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/bg_gray"
+              android:gravity="center_horizontal"
+              android:orientation="vertical">
+
+    <include layout="@layout/common_title"/>
+
+    <!-- 标题 -->
+
+    <LinearLayout
+        android:id="@+id/ll_question_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <EditText
+            android:id="@+id/et_question_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="标题(长度不大于20)"
+            android:minLines="2"
+            android:paddingLeft="@dimen/x5"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@android:color/darker_gray"/>
+    </LinearLayout>
+
+    <!-- 内容 -->
+
+    <EditText
+        android:id="@+id/et_message"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="13"
+        android:background="@null"
+        android:gravity="left|top"
+        android:hint="写入你的回答..."
+        android:inputType="textMultiLine"
+        android:minLines="10"
+        android:paddingLeft="@dimen/x5"
+        android:paddingTop="@dimen/y5"/>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <!-- 要上传的图片，默认隐藏 -->
+        <LinearLayout
+            android:id="@+id/ll_upload_image"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="@dimen/x30"
+                android:layout_height="@dimen/y30"
+                android:layout_marginLeft="@dimen/x5"
+                android:background="@null"/>
+
+            <ImageView
+                android:layout_width="@dimen/x30"
+                android:layout_height="@dimen/y30"
+                android:layout_marginLeft="@dimen/x5"
+                android:background="@null"/>
+
+            <ImageView
+                android:layout_width="@dimen/x30"
+                android:layout_height="@dimen/y30"
+                android:layout_marginLeft="@dimen/x5"
+                android:background="@null"/>
+        </LinearLayout>
+        <!-- 要上传的语音，默认隐藏 -->
+        <include
+            android:id="@+id/rl_play_voice_ui"
+            layout="@layout/play_voice_ui"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:visibility="invisible"/>
+    </LinearLayout>
+
+
+    <!--删除内容的图标-->
+    <ImageView
+        android:id="@+id/iv_delete"
+        android:layout_width="@dimen/x30"
+        android:layout_height="@dimen/y30"
+        android:layout_marginLeft="@dimen/x5"
+        android:layout_weight="0.3"
+        android:src="@android:drawable/ic_delete"/>
+    <!-- 操作栏，添加图片，语音等 -->
+
+    <LinearLayout
+        android:id="@+id/ll_operation"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_alignParentBottom="true"
+        android:layout_weight="1.5"
+        android:gravity="center_vertical"
+        android:background="@android:color/white"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        >
+
+        <ImageView
+            android:id="@+id/iv_add_icon"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y35"
+            android:layout_marginLeft="@dimen/x5"
+            android:layout_weight="1"
+            android:background="@drawable/change_selector"
+            android:src="@android:drawable/ic_menu_gallery"/>
+
+        <com.gdxz.zhongbao.client.view.customView.RecorderButton
+            android:minHeight="@dimen/y25"
+            android:id="@+id/btn_addVoice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:background="@drawable/btn_recorder_normal"
+            android:text="按住说话"/>
+
+        <ImageView
+            android:id="@+id/iv_add_own_photo"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y35"
+            android:background="@drawable/change_selector"
+            android:layout_marginLeft="@dimen/x5"
+            android:layout_weight="1"
+            android:src="@android:drawable/ic_menu_camera"/>
+    </LinearLayout>
+
+</LinearLayout>

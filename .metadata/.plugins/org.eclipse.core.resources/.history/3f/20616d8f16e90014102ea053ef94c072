@@ -1,0 +1,33 @@
+package com.cataipq.main;
+
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
+public class StringUtils
+{
+
+	public static String getInputStream2String(InputStream is)
+	{
+		byte[] b=new byte[1024];
+		int len;
+		ByteArrayOutputStream baos=new ByteArrayOutputStream();
+		try
+		{
+			while((len=is.read(b))!=-1)
+			{
+				baos.write(b, 0, len);
+			}
+			String result=new String(baos.toByteArray(),"gbk");
+			System.out.println(result);
+			return result;
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+}

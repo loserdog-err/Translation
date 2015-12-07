@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/y5"
+                android:paddingTop="@dimen/y5">
+
+    <com.gdxz.zhongbao.client.view.customView.RoundImageView
+        android:id="@+id/iv_icon"
+        android:layout_width="@dimen/x40"
+        android:layout_height="@dimen/y35"
+        android:layout_marginLeft="@dimen/x5"
+        android:src="@drawable/head"/>
+
+    <TextView
+        android:id="@+id/tv_first"
+        style="@style/font1_black_normal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/x5"
+        android:layout_toRightOf="@id/iv_icon"
+        android:text="陈岸涛"/>
+
+    <TextView
+        android:id="@+id/tv_second"
+        style="@style/font1_black_normal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/x10"
+        android:text="正确率:92.1%"/>
+
+</RelativeLayout>

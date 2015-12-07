@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <include layout="@layout/common_title"/>
+
+    <com.gdxz.zhongbao.client.view.customView.MyEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="团队名"/>
+
+    <com.gdxz.zhongbao.client.view.customView.MyEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left|center"
+        android:hint="团队宣言"
+        android:minLines="4"/>
+
+    <Button
+        android:layout_width="@dimen/x300"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/y25"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/btn_change"
+        android:text="创建"/>
+</LinearLayout>

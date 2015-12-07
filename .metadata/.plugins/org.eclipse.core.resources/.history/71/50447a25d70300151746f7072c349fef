@@ -1,0 +1,332 @@
+package com.gdxz.zhongbao.client.view.activity;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import org.w3c.dom.Text;
+
+import com.gdxz.zhongbao.client.Service.QuestionService;
+import com.gdxz.zhongbao.client.Service.impl.QuestionServiceImpl;
+import com.gdxz.zhongbao.client.common.CommonAdapter;
+import com.gdxz.zhongbao.client.common.ViewHolder;
+import com.gdxz.zhongbao.client.domain.Answer;
+import com.gdxz.zhongbao.client.domain.Question;
+import com.gdxz.zhongbao.client.domain.User;
+import com.gdxz.zhongbao.client.utils.DateUtils;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
+
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.Window;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.ScrollView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+/**
+ * 问题详细信息activity
+ * 
+ * @author chenantao
+ * 
+ */
+public class QuestionDetailActivity extends Activity
+{
+	// 一些常量
+	public final static int TEXT_DATA_LOAD_COMPLATE = 1;// 代表文字信息加载完成
+	public final static int SERVER_ERROR = 2;
+
+	QuestionService questionService = new QuestionServiceImpl();
+	String questionId;
+
+	// actionbar
+	TextView tvTitle;
+	ImageView ivBack;
+
+	ScrollView svWrapper;
+
+	// ---------------------------------------------题主部分----------------------------------
+	// 题主信息以及悬赏部分
+	ImageView ivQuestionerHead;// 题主头像
+	TextView tvQuestionerName;// 题主姓名
+	TextView tvQuestionerGender;// 题主性别
+	TextView tvRewardAmount;// 悬赏金额
+	// 问题部分
+	TextView tvQuestionTitle;
+	TextView tvQuestionConten;
+	TextView tvPostTime;
+	// 快捷操作栏部分
+	TextView tvFollow;// 关注
+	TextView tvAnswerQuestioner;// 回答题主
+	User questioner;
+
+	// ---------------------------------------------最佳答案部分----------------------------------
+	LinearLayout wrapperBestAnswer;// 包裹最佳答案栏的linearlayout
+	ImageView ivBestAnswerHead;// 最佳答案的头像
+	TextView tvBestAnswerName;// 最佳答案的用户名
+	TextView tvBestAnswerContent;
+	TextView tvBestAnswerPostTime;// 最佳答案的发布时间
+	TextView tvBestAnswerPraise;// 赞
+	TextView tvBestAnswerDespise;// 鄙视
+
+	User bestAnswer;
+	// ---------------------------------------------回答部分----------------------------------
+	PullToRefreshListView pullToRefreshListView;
+	CommonAdapter<Map<String, String>> listViewAdapter;
+	List<Map<String, String>> items;
+	List<String> answerHeads;// 回答者的头像，以路径的形式存储
+	List<String> answerNames;
+	List<String> answerCotentns;
+	List<String> answerPostTimes;
+	List<String> answerPraise;
+	List<String> answerDespise;
+
+	boolean isBest;// 标识是否拥有最佳答案
+
+	// 从服务端返回来的数据
+	Map<String, Object> data;
+	// 进度对话框
+	ProgressDialog progressDialog;
+	private Handler handler = new Handler()
+	{
+		@Override
+		public void handleMessage(Message msg)
+		{
+			switch (msg.what)
+			{
+			case TEXT_DATA_LOAD_COMPLATE:
+				data = (Map<String, Object>) msg.obj;
+				hideProgressDialog();
+				parseData();
+				break;
+			case SERVER_ERROR:
+				Toast.makeText(QuestionDetailActivity.this, "服务器错误", 1).show();
+			default:
+				break;
+			}
+			super.handleMessage(msg);
+		}
+	};
+
+	// 题主信息
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState)
+	{
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		setContentView(R.layout.home_question_detail_ui);
+		questionId = getIntent().getStringExtra("questionId");
+		// System.out.println("questionId:" + questionId);
+		initView();
+		// 隐藏布局以及显示进度条对话框
+		progressDialog = ProgressDialog.show(this, "问题详情", "精彩内容马上呈现");
+		svWrapper = (ScrollView) findViewById(R.id.sv_wrapper);
+		svWrapper.setVisibility(View.INVISIBLE);
+
+		pullToRefreshListView.setMode(Mode.BOTH);
+		pullToRefreshListView.setScrollingWhileRefreshingEnabled(true);
+
+	}
+
+	/**
+	 * 显示布局和隐藏进度对话框
+	 */
+	public void hideProgressDialog()
+	{
+		progressDialog.hide();
+		svWrapper.setVisibility(View.VISIBLE);
+	}
+
+	/**
+	 * 解析从服务端返回来的数据
+	 */
+	public void parseData()
+	{
+		// 设置题主的数据
+		initQuestioner();
+		// Set<Answer> answers = question.getAnswers();
+		// 设置回复的数据
+		for (Answer answer : (List<Answer>) (data.get("answers")))
+		{
+			if (answer.getIsBest())
+			{
+				initBestAnswer(answer);
+				continue;
+			}
+			answerHeads.add(answer.getAuthor().getHead());
+			answerNames.add(answer.getAuthor().getUsername());
+			answerCotentns.add(answer.getContent());
+			answerPostTimes.add(answer.getPostTime() == null ? "" : DateUtils
+					.date2string(answer.getPostTime(), "yyyy-MM-dd"));
+			answerPraise.add(answer.getPraiseCount() + "");
+			answerDespise.add(answer.getDespiseCount() + "");
+		}
+		initListView();
+	}
+
+	/**
+	 * 初始化各view
+	 */
+	public void initView()
+	{
+		// actionbar
+		tvTitle = (TextView) findViewById(R.id.tv_title);
+		tvTitle.setText("问题详情");
+		ivBack = (ImageView) findViewById(R.id.iv_back);
+		ivBack.setOnClickListener(new OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				((Activity) (QuestionDetailActivity.this)).finish();
+			}
+		});
+		// 题主部分
+		ivQuestionerHead = (ImageView) findViewById(R.id.iv_questioner_head);
+		tvQuestionerName = (TextView) findViewById(R.id.tv_questioner_name);
+		tvQuestionerGender = (TextView) findViewById(R.id.tv_questioner_gender);
+		tvRewardAmount = (TextView) findViewById(R.id.tv_reward_amount);
+		tvQuestionTitle = (TextView) findViewById(R.id.tv_question_title);
+		tvQuestionConten = (TextView) findViewById(R.id.tv_question_content);
+		tvPostTime = (TextView) findViewById(R.id.tv_question_postTime);
+		tvFollow = (TextView) findViewById(R.id.tv_follow);
+		tvAnswerQuestioner = (TextView) findViewById(R.id.tv_answer_questioner);
+		// 最佳答案部分
+		wrapperBestAnswer = (LinearLayout) findViewById(R.id.ll_best_answer);
+		ivBestAnswerHead = (ImageView) findViewById(R.id.iv_best_answer_head);
+		tvBestAnswerName = (TextView) findViewById(R.id.tv_best_answer_name);
+		tvBestAnswerContent = (TextView) findViewById(R.id.tv_best_answer_content);
+		tvBestAnswerPostTime = (TextView) findViewById(R.id.tv_best_answer_postTime);
+		tvBestAnswerPraise = (TextView) findViewById(R.id.tv_best_answer_praise);
+		tvBestAnswerDespise = (TextView) findViewById(R.id.tv_best_answer_despise);
+		answerHeads = new ArrayList<>();
+		answerNames = new ArrayList<>();
+		answerCotentns = new ArrayList<>();
+		answerPostTimes = new ArrayList<>();
+		answerPraise = new ArrayList<>();
+		answerDespise = new ArrayList<>();
+
+		// 默认隐藏最佳答案且不占位置
+		wrapperBestAnswer.setVisibility(View.GONE);
+		// 回答部分
+		pullToRefreshListView = (PullToRefreshListView) findViewById(R.id.lv_answer);
+		// 加载服务器端问题的数据
+		questionService.loadQuestionDetailData(handler, questionId, "1",
+				pullToRefreshListView);
+	}
+
+	/**
+	 * 初始化题主部分
+	 */
+	public void initQuestioner()
+	{
+		Question question = (Question) data.get("question");
+		tvQuestionerName.setText(question.getAuthor().getUsername());
+		tvQuestionerGender
+				.setText(question.getAuthor().getGender() == 0 ? "男" : "女");
+		tvRewardAmount.setText(question.getRewardAmount() + "");
+		tvQuestionTitle.setText(question.getTitle());
+		tvQuestionConten.setText(question.getContent());
+		tvPostTime.setText(question.getPostTime() == null ? "" : DateUtils
+				.date2string(question.getPostTime(), "yyyy-MM-dd"));
+	}
+
+	/**
+	 * 初始化最佳答案部分
+	 */
+	public void initBestAnswer(Answer answer)
+	{
+		isBest = true;
+		// 显示最佳答案的界面
+		wrapperBestAnswer.setVisibility(View.VISIBLE);
+		tvBestAnswerName.setText(answer.getAuthor().getUsername());
+		tvBestAnswerContent.setText(answer.getContent());
+		tvBestAnswerPostTime.setText(DateUtils.date2string(answer.getPostTime(),
+				"yyyy-MM-dd"));
+		tvBestAnswerPraise.setText(answer.getPraiseCount() + "");
+		tvBestAnswerDespise.setText(answer.getDespiseCount() + "");
+	}
+
+	/**
+	 * 初始化listview
+	 */
+	public void initListView()
+	{
+		items = new ArrayList<>();
+		for (int i = 0; i < answerCotentns.size(); i++)
+		{
+			Map<String, String> item = new HashMap<>();
+			item.put("answerHeads", answerHeads.get(i));
+			item.put("answerNames", answerNames.get(i));
+			item.put("answerCotentns", answerCotentns.get(i));
+			item.put("answerPostTimes", answerPostTimes.get(i));
+			item.put("answerPraise", answerPraise.get(i));
+			item.put("answerDespise", answerDespise.get(i));
+			items.add(item);
+		}
+		System.out.println(items.size());
+		pullToRefreshListView
+				.setAdapter(listViewAdapter = new CommonAdapter<Map<String, String>>(
+						getApplicationContext(), items,
+						R.layout.home_question_detail_item)
+				{
+
+					@Override
+					public void convert(ViewHolder helper, Map<String, String> item,
+							int position)
+					{
+						System.out.println(position);
+						LinearLayout wrapper = (LinearLayout) helper
+								.getConvertView();
+						String head = item.get("answerHeads");
+						TextView tvAnswerName = helper.getView(R.id.tv_answer_name);
+						TextView tvAnswerContent = helper
+								.getView(R.id.tv_answer_content);
+						TextView tvAnswerPostTime = helper
+								.getView(R.id.tv_answer_postTime);
+						TextView tvAnswerPraise = helper
+								.getView(R.id.tv_answer_praise);
+						TextView tvAnswerDespise = helper
+								.getView(R.id.tv_answer_despise);
+						tvAnswerName.setText(item.get("answerNames"));
+						tvAnswerContent.setText(item.get("answerCotentns"));
+						tvAnswerPostTime.setText("answerPostTimes");
+						tvAnswerPraise.setText("answerPraise");
+						tvAnswerDespise.setText("answerDespise");
+					}
+				});
+		pullToRefreshListView
+				.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>()
+				{
+
+					@Override
+					public void onPullUpToRefresh(
+							PullToRefreshBase<ListView> refreshView)// 上拉加载数据
+					{
+						Toast.makeText(QuestionDetailActivity.this, "上拉", 1).show();
+					}
+
+					@Override
+					public void onPullDownToRefresh(
+							PullToRefreshBase<ListView> refreshView)
+					{
+						Toast.makeText(QuestionDetailActivity.this, "下拉", 1).show();
+
+					}
+
+				});
+	}
+}

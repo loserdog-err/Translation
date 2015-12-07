@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+
+<hibernate-mapping package="com.gdxz.zhongbao.server.domain">
+
+ <class name="User" dynamic-insert="true" table="user">
+
+  <id name="id">
+   <generator class="native" />
+  </id>
+
+  <property name="username" type="string" length="18"></property>
+  <property name="password" type="string" length="15" />
+  <property name="activity" type="boolean" />
+  <property name="email" type="string" length="25" />
+  <property name="address" type="string" length="50" />
+  <property name="description" type="string" length="50" />
+  <property name="mobilePhone" type="string" length="12" />
+  <property name="mood" type="string" length="50" />
+  <property name="head" type="string" length="50" />
+  <property name="realName" type="string" length="10" />
+  <property name="birthday" type="timestamp" />
+
+
+
+  <property name="point" type="integer" />
+  <property name="gender" type="integer" />
+  <property name="age" type="integer" />
+  <property name="correctRate" type="java.lang.Float">
+   <column name="correctRate" default="0"></column>
+  </property>
+  <property name="passwordErrorCount" type="integer">
+   <column name="passwordErrorCount" default="0"></column>
+  </property>
+
+  <!--team属性，本类与Team一对一的映射关系 -->
+  <many-to-one name="team" class="Team" column="teamId" lazy="false"
+   cascade="save-update"
+  ></many-to-one>
+
+  <!--questions属性，本类与Question一对多的映射关系 -->
+  <!-- <set name="questions" inverse="true"> <key column="userId"></key> <one-to-many 
+   class="Question" /> </set> -->
+  <!-- <set name="cartItems" table="cartItem_book"> <key column="bookId"></key> 
+   <many-to-many class="CartItem" column="cartItemId"></many-to-many> </set> -->
+
+  <!--answers属性，本类与Answer一对多的映射关系 -->
+  <!-- <set name="answers" inverse="true"> <key column="userId"> </key> <one-to-many 
+   class="Answer" /> </set> -->
+ </class>
+
+</hibernate-mapping>

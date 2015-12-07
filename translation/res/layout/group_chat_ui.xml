@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/chat_bg"
+                tools:context=".MainActivity">
+
+
+    <include
+        android:id="@+id/ll_title"
+        layout="@layout/common_title"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y40"
+        android:layout_alignParentBottom="true"
+        android:background="#E5E5E5"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <!--切换语音 文字 按钮-->
+        <ImageButton
+            android:layout_centerVertical="true"
+            android:id="@+id/ib_toggle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x10"
+            android:layout_marginRight="@dimen/x10"
+            android:background="@drawable/voice"
+            android:gravity="center"/>
+
+        <!--发送按钮-->
+        <Button
+            android:id="@+id/btn_send"
+            style="@style/font1_black_normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/best_answer_selector"
+            android:minHeight="@dimen/y25"
+            android:text="发送"
+            />
+
+
+        <RelativeLayout
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/ib_toggle"
+            android:layout_toLeftOf="@id/btn_send"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <EditText
+                style="@style/font1_black_normal"
+                android:layout_centerVertical="true"
+                android:id="@+id/et_send_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/chat_input_bg"
+                android:gravity="start"
+                android:cursorVisible="true"
+                android:textCursorDrawable="@drawable/text_cursor_bg"
+                android:padding="5dp"
+                android:inputType="textMultiLine"/>
+
+
+            <com.gdxz.zhongbao.client.view.customView.RecorderButton
+                android:id="@+id/voice_btn"
+                android:layout_centerVertical="true"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y30"
+                android:background="@drawable/btn_recorder_normal"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="@string/record_voice_hint"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/lv_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/rl_bottom"
+        android:layout_below="@id/ll_title"
+        android:divider="@null"
+        ></ListView>
+
+</RelativeLayout>

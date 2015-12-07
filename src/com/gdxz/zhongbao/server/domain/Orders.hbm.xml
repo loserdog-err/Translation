@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+
+<hibernate-mapping package="com.gdxz.zhongbao.server.domain">
+
+ <class name="Orders" dynamic-insert="true" table="orders">
+  <id name="id">
+   <generator class="native" />
+  </id>
+
+  <property name="orderId" type="string"></property>
+  <property name="price" type="float"></property>
+  <property name="goodName" type="string"></property>
+  <property name="orderTime" type="timestamp" />
+  <property name="type" type="integer" />
+
+  <!--author属性，本类与User类多对一的映射关系 -->
+  <many-to-one name="user" class="User" column="userId" lazy="false" />
+
+ </class>
+
+</hibernate-mapping>

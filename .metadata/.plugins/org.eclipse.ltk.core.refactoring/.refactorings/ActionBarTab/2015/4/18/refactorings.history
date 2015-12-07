@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;FragmentDummy.java&apos; to &apos;ActionBarDropDown/src/com.cataipq.main&apos;&#x0D;&#x0A;- Original project: &apos;ActionBarTab&apos;&#x0D;&#x0A;- Destination element: &apos;ActionBarDropDown/src/com.cataipq.main&apos;&#x0D;&#x0A;- Original element: &apos;com.cataipq.main.FragmentDummy.java&apos;" description="Copy compilation unit" destination="=ActionBarDropDown/src&lt;com.cataipq.main" element1="/src&lt;com.cataipq.main{FragmentDummy.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1430070222062" units="1" version="1.0"/>
+</session>

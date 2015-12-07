@@ -1,0 +1,19 @@
+package com.cataipq.text;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class Text
+{
+	public static void main(String[] args) throws Exception
+	{
+		boolean temp = false;
+	       Pattern p=Pattern.compile("[\u4e00-\u9fa5]"); 
+	       Matcher m=p.matcher("²İÄàÂí"); 
+	       if(m.find()){ 
+	           temp =  true;
+	       }
+	       return temp;
+	       
+	}
+}

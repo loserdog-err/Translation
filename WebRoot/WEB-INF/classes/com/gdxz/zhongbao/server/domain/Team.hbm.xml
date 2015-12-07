@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+
+<hibernate-mapping package="com.gdxz.zhongbao.server.domain">
+
+ <class name="Team" dynamic-insert="true" table="team">
+
+  <id name="id" type="long">
+  </id>
+
+  <property name="name" type="string"></property>
+  <property name="declaration" type="string" length="100" />
+  <property name="logo" type="string" />
+  <property name="buildTime" type="timestamp" />
+  <property name="score" type="integer" />
+  <property name="rank" type="integer" />
+
+  <!--captaion属性，本类与User一对一的映射关系 -->
+  <!-- <many-to-one name="captain" class="User" column="captaionId" cascade="save-update" 
+   unique="true" lazy="false"/> -->
+
+  <!--members属性，本类与User一对多的映射关系(由User维护关联关系) -->
+  <!-- <set name="members" inverse="true" cascade="save-update" lazy="false"> 
+   <key column="teamId"></key> <one-to-many class="User" /> </set> -->
+ </class>
+
+</hibernate-mapping>

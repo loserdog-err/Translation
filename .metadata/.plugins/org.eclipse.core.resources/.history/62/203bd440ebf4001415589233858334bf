@@ -1,0 +1,55 @@
+package com.cataipq.main;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.Window;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
+
+public class MainActivity extends Activity
+{
+	
+	// 定义listview的item的文本数组
+		private String[] lvItemText = { "选项1", "选项2", "选项3", "选项4", "选项5" };
+
+		// 定义listview的item的图片
+		private int[] lvItemIcon = { R.drawable.img_2, R.drawable.img_2,
+				R.drawable.img_3, R.drawable.img_4, R.drawable.img_5 };
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState)
+	{
+		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		setContentView(R.layout.activity_main);
+		initListView();
+	}
+
+	// 初始化listview
+	public void initListView()
+	{
+		System.out.println("xixi");
+		List<Map<String, Object>> listItems = new ArrayList<>();
+		for (int i = 0; i < lvItemText.length; i++)
+		{
+			Map<String, Object> listItem = new HashMap<>();
+			listItem.put("lvItemText", lvItemText[i]);
+			listItem.put("lvItemIcon", lvItemIcon[i]);
+			listItems.add(listItem);
+		}
+
+		SimpleAdapter adapter = new SimpleAdapter(this, listItems,
+				R.layout.list_item, new String[] { "lvItemText", "lvItemIcon" },
+				new int[] { R.id.tv_list, R.id.iv_list });
+		ListView listView = (ListView) findViewById(R.id.lv_menu);
+		listView.setAdapter(adapter);
+	}
+
+}

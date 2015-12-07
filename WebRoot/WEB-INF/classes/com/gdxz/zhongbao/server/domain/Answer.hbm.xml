@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+
+<hibernate-mapping package="com.gdxz.zhongbao.server.domain">
+
+ <class name="Answer" dynamic-insert="true" table="answer">
+
+  <id name="id">
+   <generator class="native" />
+  </id>
+
+  <property name="content" type="string"></property>
+  <property name="title" type="string" length="15" />
+  <property name="postTime" type="timestamp" />
+
+  <property name="praiseCount" type="int" />
+  <property name="despiseCount" type="int" />
+
+  <property name="isBest" type="boolean" />
+
+  <!--author属性，本类与User类多对一的映射关系 -->
+  <many-to-one name="author" class="User" column="userId" lazy="false" cascade="all"></many-to-one>
+  <!--question属性，本类与Question多对一的映射关系 -->
+  <many-to-one name="question" class="Question" column="questionId" lazy="false" cascade="all"></many-to-one>
+
+ </class>
+
+</hibernate-mapping>

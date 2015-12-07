@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="switchbutton-1.2.0">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/translation/build/intermediates/exploded-aar/me.xiaopan/switchbutton/1.2.0/res" />
+      <root url="jar://$PROJECT_DIR$/translation/build/intermediates/exploded-aar/me.xiaopan/switchbutton/1.2.0/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/me.xiaopan/switchbutton/1.2.0/bbf2433cebb9e07ea3a13b8ba202a0bc029eea5c/switchbutton-1.2.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

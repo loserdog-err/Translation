@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@android:color/white"
+              android:gravity="center_horizontal"
+              android:orientation="vertical">
+
+    <include layout="@layout/common_title"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y100"
+                    android:background="@drawable/personal_setting_background"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y50"
+                    android:layout_below="@id/iv_background"
+                    android:background="@android:color/white"
+                    android:gravity="center_horizontal|bottom">
+
+                    <TextView
+                        android:id="@+id/tv_username"
+                        style="@style/font2_gray_bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="陈岸涛"
+                        android:textStyle="italic"/>
+                </RelativeLayout>
+
+                <!--用户头像  -->
+                <com.gdxz.zhongbao.client.view.customView.RoundImageView
+                    android:id="@+id/iv_head"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/y75"
+                    android:src="@drawable/head"/>
+            </RelativeLayout>
+
+            <ListView
+                android:id="@+id/lv_normal"
+                android:layout_width="@dimen/x300"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y10"
+                android:background="@drawable/listview_bg">
+            </ListView>
+
+            <ListView
+                android:id="@+id/lv_dynamic"
+                android:layout_width="@dimen/x300"
+                android:layout_height="@dimen/y140"
+                android:layout_marginTop="@dimen/y10"
+                android:background="@drawable/listview_bg">
+            </ListView>
+        </LinearLayout>
+
+        <!--加载动画-->
+
+        <com.gdxz.zhongbao.client.view.customView.SplashView
+            android:id="@+id/splashView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </FrameLayout>
+
+</LinearLayout>

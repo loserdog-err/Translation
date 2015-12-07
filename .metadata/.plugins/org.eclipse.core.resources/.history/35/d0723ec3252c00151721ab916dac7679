@@ -1,0 +1,23 @@
+package com.chen.text1;
+
+import android.app.Application;
+import android.util.Log;
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.im.android.api.JMessageClient;
+import cn.jpush.im.android.demo.receiver.NotificationClickEventReceiver;
+
+public class MyApplication extends Application
+{
+	@Override
+	public void onCreate()
+	{
+		super.onCreate();
+		Log.i("JMessageDemoApplication", "Application onCreate");
+
+		JMessageClient.init(getApplicationContext());
+		JPushInterface.setDebugMode(true);
+		JMessageClient.setNotificationMode(JMessageClient.NOTI_MODE_DEFAULT);
+		new NotificationClickEventReceiver(getApplicationContext());
+	}
+
+}

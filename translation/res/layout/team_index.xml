@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <include layout="@layout/common_title"/>
+
+    <!--搜索栏-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/x5"
+        android:gravity="center_vertical"
+        android:focusable ="true"
+        android:focusableInTouchMode="true"
+        android:orientation="horizontal">
+
+        <com.gdxz.zhongbao.client.view.customView.MyEditText
+            android:id="@+id/et_search"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x5"
+            android:layout_marginRight="@dimen/x10"
+            android:layout_weight="3"
+            android:hint="团队ID/团队名"
+            android:maxLength="10"
+            />
+
+        <Button
+            android:minHeight="@dimen/y25"
+            android:id="@+id/btn_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/x5"
+            android:background="@drawable/best_answer_selector"
+            android:text="搜索"/>
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/lv_option"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/x5"
+        android:layout_marginRight="@dimen/x5"
+        android:layout_marginTop="@dimen/x5"
+        android:background="@drawable/listview_bg"></ListView>
+</LinearLayout>

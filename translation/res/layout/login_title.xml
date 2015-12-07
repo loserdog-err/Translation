@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/y30"
+    android:background="@drawable/title_bg" >
+
+    <TextView
+        style="@style/font3_white_normal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="登录"
+        android:textColor="#ffffff" />
+
+    <TextView
+        android:id="@+id/tv_regist"
+        style="@style/font3_white_normal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/x20"
+        android:text="注册"
+        android:textColor="@drawable/tv_change" />
+
+</RelativeLayout>

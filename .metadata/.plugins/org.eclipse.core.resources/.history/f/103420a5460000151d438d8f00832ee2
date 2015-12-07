@@ -1,0 +1,409 @@
+package com.gdxz.zhongbao.client.Service.impl;
+
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences.Editor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Message;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.gdxz.zhongbao.client.Service.UserService;
+import com.gdxz.zhongbao.client.domain.User;
+import com.gdxz.zhongbao.client.utils.HttpUtils;
+import com.gdxz.zhongbao.client.utils.JsonUtils;
+import com.gdxz.zhongbao.client.view.activity.HomeActivity;
+import com.gdxz.zhongbao.client.view.activity.LoginActivity;
+import com.gdxz.zhongbao.client.view.activity.PersonalDetailInfoSettingActivity;
+import com.gdxz.zhongbao.client.view.activity.R.drawable;
+import com.gdxz.zhongbao.client.view.activity.RegistActivity;
+
+/**
+ * 业务逻辑层 凡是以validateXXX命名的方法为不带业务逻辑的校验
+ * 
+ * @author chenantao
+ * 
+ */
+public class UserServiceImpl implements UserService
+{
+	// 存放错误信息的list
+	private List<String> errors;
+	// Map<String, String> errors=new HashMap<>();
+
+	// 服务器返回的json
+	JSONObject jsonObject;
+
+	// -------------------------------------登录相关------------------------------------------------------
+	/**
+	 * 登录方法
+	 */
+	@Override
+	public boolean login(User user, Context context, TextView errorTextView)
+	{
+		errors = new ArrayList<>();
+		String username = user.getUsername();
+		String password = user.getPassword();
+		String verifyCode = user.getVerifyCode();
+		if (validateUsername(username) && validatePassword(password)
+				&& validateVerifyCode(user.getVerifyCode()))
+		{
+			Map<String, String> rawParams = new HashMap<>();
+			// 设置请求参数
+			rawParams.put("username", username);
+			rawParams.put("password", password);
+			rawParams.put("verifyCode", verifyCode);
+			// 设置服务端servlet调用哪个方法
+			rawParams.put("method", "login");
+			String url = HttpUtils.BASE_URL + "UserServlet";
+			// 发送请求
+			try
+			{
+				jsonObject = new JSONObject(HttpUtils.postRequest(url, rawParams));
+				// 代表登录成功,把登录信息写进xml文件
+				if (jsonObject.getBoolean("loginIsSuccess"))
+				{
+					Editor editor = context.getSharedPreferences("userInfo",
+							Activity.MODE_PRIVATE).edit();
+					editor.putInt("userId", jsonObject.getInt("userId"));
+					editor.putString("username", jsonObject.getString("username"));
+					editor.commit();
+					Intent intent = new Intent(context, HomeActivity.class);
+					context.startActivity(intent);
+					((Activity) context).finish();
+				}
+				// 代表登录失败
+				else
+				{
+					Toast.makeText(context, jsonObject.getString("error"), 1).show();
+					errorTextView.setText(jsonObject.getString("error"));
+				}
+			} catch (Exception e)
+			{
+				e.printStackTrace();
+			}
+		} else
+		{
+			errorTextView.setText(errors.get(0));
+		}
+		return false;
+	}
+
+	// -------------------------------------注册相关------------------------------------------------------
+
+	@Override
+	public boolean regist(User user, Context context, TextView textViewError)
+	{
+		errors = new ArrayList<>();
+		String username = user.getUsername();
+		String password = user.getPassword();
+		String rePassword = user.getRePassowrd();
+		String mobilePhone = user.getMobilePhone();
+		String email = user.getEmail();
+		if (validateEmail(email) && validateMobilePhone(mobilePhone + "")
+				&& validatePassword(password)
+				&& validateRePassword(password, rePassword)
+				&& validateUsername(username))
+		{
+			Map<String, String> rawParams = new HashMap<>();
+			// 设置请求参数
+			rawParams.put("username", username);
+			rawParams.put("password", password);
+			rawParams.put("rePassword", rePassword);
+			rawParams.put("mobilePhone", mobilePhone + "");
+			rawParams.put("email", email);
+			// 设置服务端servlet调用哪个方法
+			rawParams.put("method", "regist");
+			String url = HttpUtils.BASE_URL + "UserServlet";
+			// 发送请求
+			try
+			{
+				jsonObject = new JSONObject(HttpUtils.postRequest(url, rawParams));
+				// 代表注册成功
+				if (jsonObject.getBoolean("registIsSuccess"))
+				{
+					Toast.makeText(context, "注册成功", 1).show();
+				}
+				// 代表注册失败
+				else
+				{
+					Toast.makeText(context, jsonObject.getString("error"), 1).show();
+					textViewError.setText(jsonObject.getString("error"));
+				}
+			} catch (Exception e)
+			{
+				e.printStackTrace();
+				return false;
+			}
+
+		} else
+		// 校验失败
+		{
+			textViewError.setText(errors.get(0));
+		}
+
+		return false;
+	}
+
+	
+
+	// -------------------------------------校验相关------------------------------------------------------
+
+	/**
+	 * 校验验证码
+	 */
+	@Override
+	public boolean validateVerifyCode(String verifyCode)
+	{
+		if ("".equals(verifyCode) || null == verifyCode)
+		{
+			// errors.put("verifyCodeError", "密码不能为空");
+			errors.add("验证码不能为空");
+			return false;
+		} else
+		{
+			if (verifyCode.length() != LoginActivity.VERIFYCODE_LENGTH)
+			{
+				// errors.put("verifyCodeError", "用户名长度必须在6到14之间");
+				errors.add("验证码有误");
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * 校验用户名
+	 */
+	public boolean validateUsername(String username)
+	{
+		if ("".equals(username) || null == username)
+		{
+			// errors.put("usernameError", "用户名不能为空");
+			errors.add("用户名不能为空");
+			return false;
+		} else
+		{
+			if (username.length() > 16 || username.length() < 2)
+			{
+				// errors.put("usernameError", "用户名长度必须在6到16之间");
+				System.out.println("validate: " + username.length());
+				errors.add("用户名长度必须在6到16之间");
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * 校验密码
+	 */
+	@Override
+	public boolean validatePassword(String password)
+	{
+		if ("".equals(password) || null == password)
+		{
+			// errors.put("passwordError", "密码不能为空");
+			errors.add("密码不能为空");
+			return false;
+		} else
+		{
+			if (password.length() > 14 || password.length() < 6)
+			{
+				// errors.put("passwordError", "用户名长度必须在6到14之间");
+				errors.add("密码长度必须在6到14之间");
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * 校验重复密码
+	 */
+	@Override
+	public boolean validateRePassword(String password, String rePassword)
+	{
+		if ("".equals(rePassword) || null == rePassword)
+		{
+			// errors.put("passwordError", "密码不能为空");
+			errors.add("重复密码不能为空");
+			return false;
+		} else if (rePassword.length() > 14 || rePassword.length() < 6)
+		{
+			errors.add("重复密码长度必须在6到14之间");
+			return false;
+		} else if (!(password.equals(rePassword)))
+		{
+			errors.add("两次输入的密码不一致");
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * 校验手机号
+	 */
+	@Override
+	public boolean validateMobilePhone(String mobilePhone)
+	{
+		if ("".equals(mobilePhone) || null == mobilePhone)
+		{
+			// errors.put("passwordError", "密码不能为空");
+			errors.add("手机号不能为空");
+			return false;
+		} else if (!(mobilePhone.matches("1{1}\\d{10}")))// 正则表达式，匹配以1开头的11位正数
+		{
+			errors.add("手机号格式不对");
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * 校验邮箱
+	 */
+	@Override
+	public boolean validateEmail(String email)
+	{
+		if ("".equals(email) || null == email)
+		{
+			// errors.put("passwordError", "密码不能为空");
+			errors.add("邮箱不能为空");
+			return false;
+			// } else if (!(email
+			// .matches("^([a-z0-9A-Z]+[-|_|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$")))//
+			// 正则表达式，匹配邮箱格式
+			// {
+			// errors.add("邮箱格式错误");
+			// return false;
+		} else if (email.length() > 25)
+		{
+			errors.add("邮箱格式错误");
+			return false;
+		} else
+		{
+			Pattern pattern = Pattern
+					.compile("\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*");
+			Matcher matcher = pattern.matcher(email);
+			return matcher.matches();
+		}
+	}
+
+	/**
+	 * 设置验证码图片
+	 */
+	@Override
+	public void setVerifyCodeImage(final ImageView imageView)
+	{
+		new AsyncTask<java.lang.Void, java.lang.Void, Bitmap>()
+		{
+
+			@Override
+			protected Bitmap doInBackground(Void... params)
+			{
+				String url = HttpUtils.BASE_URL + "UserServlet";
+				Map<String, String> rawParams = new HashMap<>();
+				rawParams.put("method", "getVerifyCode");
+				InputStream is = HttpUtils.getResourceInputStream(url, rawParams);
+				Bitmap bitmap = BitmapFactory.decodeStream(is);
+				return bitmap;
+			}
+
+			@Override
+			protected void onPostExecute(Bitmap result)
+			{
+				imageView.setImageBitmap(result);
+			}
+		}.execute();
+	}
+
+	/**
+	 * 检验真实用户名
+	 */
+	@Override
+	public boolean validateRealName(String realName)
+	{
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	// -------------------------------------用户信息设置相关------------------------------------------------------
+
+	/**
+	 * 加载用户的详细信息
+	 */
+	@Override
+	public void getUserInfo(final int userId, final Handler handler,
+			final boolean isDatail)
+	{
+		new AsyncTask<java.lang.Void, java.lang.Void, User>()
+		{
+
+			@Override
+			protected User doInBackground(Void... params)
+			{
+				String methodName = "";
+				String url = HttpUtils.BASE_URL + "UserServlet";
+				Map<String, String> rawParams = new HashMap<>();
+				if (isDatail)
+				{
+					methodName = "getUserDetailInfo";
+				} else
+				{
+					methodName = "getUserInfo";
+				}
+				rawParams.put("method", methodName);
+				rawParams.put("id", userId + "");
+				try
+				{
+					jsonObject = new JSONObject(
+							HttpUtils.postRequest(url, rawParams));
+					boolean isSuccess = jsonObject.getBoolean("isSuccess");
+					if (isSuccess)// 成功得到对应user
+					{
+//						System.out.println(jsonObject.getJSONObject("userInfo").toString());
+						User user = (User) JsonUtils.toBean(
+								jsonObject.getJSONObject("userInfo"), User.class);
+
+						return user;
+					} else
+					{
+						return null;
+					}
+
+				} catch (Exception e)
+				{
+					e.printStackTrace();
+					return null;
+				}
+			}
+
+			@Override
+			protected void onPostExecute(User result)
+			{
+				Message msg = new Message();
+				msg.what = PersonalDetailInfoSettingActivity.SET_USER_DETAIL_INFO;
+				msg.obj = result;
+				handler.sendMessage(msg);
+			}
+
+		}.execute();
+	}
+
+}

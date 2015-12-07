@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+>
+
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:applicationContext.xml</param-value>
+  </context-param>
+  
+  <listener>
+    <listener-class>
+        org.springframework.web.context.ContextLoaderListener
+      </listener-class>
+  </listener>
+  
+ <servlet>
+  <servlet-name>BaseServlet</servlet-name>
+  <servlet-class>com.gdxz.zhongbao.server.servlet.BaseServlet</servlet-class>
+ </servlet>
+ <servlet-mapping>
+  <servlet-name>BaseServlet</servlet-name>
+  <url-pattern>/BaseServlet</url-pattern>
+ </servlet-mapping>
+ 
+ <servlet>
+  <servlet-name>QuestionServlet</servlet-name>
+  <servlet-class>com.gdxz.zhongbao.server.servlet.QuestionServlet</servlet-class>
+ </servlet>
+ <servlet-mapping>
+  <servlet-name>QuestionServlet</servlet-name>
+  <url-pattern>/QuestionServlet</url-pattern>
+ </servlet-mapping>
+ 
+  <servlet>
+  <servlet-name>UserServlet</servlet-name>
+  <servlet-class>com.gdxz.zhongbao.server.servlet.UserServlet</servlet-class>
+ </servlet>
+ <servlet-mapping>
+  <servlet-name>UserServlet</servlet-name>
+  <url-pattern>/UserServlet</url-pattern>
+ </servlet-mapping>
+ 
+  <servlet>
+  <servlet-name>UserDynamicServlet</servlet-name>
+  <servlet-class>com.gdxz.zhongbao.server.servlet.UserDynamicServlet</servlet-class>
+ </servlet>
+ <servlet-mapping>
+  <servlet-name>UserDynamicServlet</servlet-name>
+  <url-pattern>/UserDynamicServlet</url-pattern>
+ </servlet-mapping>
+ 
+  <servlet>
+  <servlet-name>AnswerServlet</servlet-name>
+  <servlet-class>com.gdxz.zhongbao.server.servlet.AnswerServlet</servlet-class>
+ </servlet>
+  <servlet>
+    <servlet-name>UploadFileServlet</servlet-name>
+    <servlet-class>com.gdxz.zhongbao.server.servlet.UploadFileServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>TeamServlet</servlet-name>
+    <servlet-class>com.gdxz.zhongbao.server.servlet.TeamServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>ApplicationListServlet</servlet-name>
+    <servlet-class>com.gdxz.zhongbao.server.servlet.ApplicationListServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>UserRemindServlet</servlet-name>
+    <servlet-class>com.gdxz.zhongbao.server.servlet.UserRemindServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>OrderServlet</servlet-name>
+    <servlet-class>com.gdxz.zhongbao.server.servlet.OrderServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>AssetInfoServlet</servlet-name>
+    <servlet-class>com.gdxz.zhongbao.server.servlet.AssetInfoServlet</servlet-class>
+  </servlet>
+
+
+
+
+
+
+ <servlet-mapping>
+  <servlet-name>AnswerServlet</servlet-name>
+  <url-pattern>/AnswerServlet</url-pattern>
+ </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UploadFileServlet</servlet-name>
+    <url-pattern>/UploadFileServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>TeamServlet</servlet-name>
+    <url-pattern>/TeamServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ApplicationListServlet</servlet-name>
+    <url-pattern>/ApplicationListServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UserRemindServlet</servlet-name>
+    <url-pattern>/UserRemindServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>OrderServlet</servlet-name>
+    <url-pattern>/OrderServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AssetInfoServlet</servlet-name>
+    <url-pattern>/AssetInfoServlet</url-pattern>
+  </servlet-mapping>
+ 
+  <!--配置解决懒加载过滤器  -->
+ <filter>
+  <filter-name>OpenSessionInViewFilter</filter-name>
+  <filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>
+ </filter>
+ 
+ <filter-mapping>
+  <filter-name>OpenSessionInViewFilter</filter-name>
+  <url-pattern>/*</url-pattern>
+ </filter-mapping>
+ 
+
+
+ 
+ 
+ <welcome-file-list>
+  <welcome-file>index.jsp</welcome-file>
+ </welcome-file-list>
+</web-app>

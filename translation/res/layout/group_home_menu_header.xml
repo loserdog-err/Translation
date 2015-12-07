@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:paddingTop="@dimen/y5"
+              android:paddingBottom="@dimen/y20"
+              android:gravity="center_vertical"
+              android:orientation="horizontal">
+
+    <com.gdxz.zhongbao.client.view.customView.RoundImageView
+        android:id="@+id/iv_head"
+        android:layout_width="@dimen/x50"
+        android:layout_height="@dimen/x45"
+        android:src="@drawable/head"/>
+
+    <TextView
+        android:id="@+id/tv_username"
+        style="@style/font2_white_bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x5"/>
+</LinearLayout>

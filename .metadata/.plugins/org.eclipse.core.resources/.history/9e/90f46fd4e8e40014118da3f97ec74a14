@@ -1,0 +1,36 @@
+package com.cataipq.service;
+
+import java.io.File;
+import java.io.FileOutputStream;
+
+import android.content.Context;
+import android.text.TextUtils;
+import android.widget.Toast;
+
+public class LoginService
+{
+
+	public boolean login(Context context,String username,String password,boolean isRemember)
+	{
+		if("catai[q".equals(username)&&"20140107".equals(password))
+		{
+			try
+			{
+				if(isRemember)
+				{
+					File file=new File(context.getFilesDir(),"info.txt");
+					FileOutputStream fos=new FileOutputStream(file);
+					fos.write((username+"##"+password).getBytes());
+				}
+				return true;
+				
+			} catch (Exception e)
+			{
+				e.printStackTrace();
+				return false;
+			}
+			
+		}
+		return false;
+	}
+}

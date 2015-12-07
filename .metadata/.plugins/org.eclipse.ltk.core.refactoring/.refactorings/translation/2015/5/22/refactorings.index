@@ -1,0 +1,25 @@
+1432475055250	Delete element
+1432477834442	Delete element
+1432477837997	Copy compilation unit
+1432477844407	Rename type 'QuestionService'
+1432528619795	Delete element
+1432531823020	Delete element
+1432547359662	Delete element
+1432562358084	Rename method 'showData'
+1432607619346	Delete element
+1432607621365	Delete element
+1432608060394	Rename resource 'personl_detail_info_setting_item.xml'
+1432608067878	Rename resource 'personl_setting_item.xml'
+1432619024432	Rename resource 'home_question_ui.java.xml'
+1432619032068	Rename resource 'home_question_u.xml'
+1432663754628	Delete element
+1432737086203	Copy compilation unit
+1432737091730	Rename type 'AnswerService'
+1432774331978	Rename method 'sendAnswer'
+1432796231184	Delete element
+1432796407924	Rename type 'MyAdapter'
+1432869284187	Rename type 'BitmapLruCacheUtils'
+1432884018353	Rename type 'ImageLoader'
+1432885122632	Rename field 'answerIds'
+1432921926913	Rename field 'paths'
+1432921937685	Rename field 'voiceFile'

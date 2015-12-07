@@ -1,0 +1,100 @@
+package com.cataipq.text;
+
+import java.io.InputStream;
+import java.io.RandomAccessFile;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+public class TextMain
+{
+	public static final int THREAD_COUNT=3;
+	public static void main(String[] args)
+	{
+		String path="http://localhost:8080/Login/inst.exe";
+		try
+		{
+			URL url=new URL(path);
+			HttpURLConnection connection=(HttpURLConnection) url.openConnection();
+			connection.setRequestMethod("GET");
+			int code=connection.getResponseCode();
+			System.out.println(code);
+			if(code==200)
+			{
+				int length=connection.getContentLength();
+				System.out.println("文件大小："+length);
+				//每条线程下载的大小
+				int blockSize=length/THREAD_COUNT;
+				for(int i=1;i<=THREAD_COUNT;i++)
+				{
+					int startIndex=(i-1)*blockSize;
+					int endIndex=i*blockSize-1;
+					if(i==THREAD_COUNT)
+					{
+						//如果是最后一条线程
+						endIndex=length;
+					}
+					System.out.println("线程：  "+i+"  下载位置："+startIndex+" ——》"+endIndex);
+//					new DownLoadThread(startIndex, endIndex, path).start();
+				}
+				
+			}
+		}
+		catch (Exception e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+}
+
+class DownLoadThread extends Thread
+{
+	private int startIndex;
+	private int endIndex;
+	private String path;
+	public DownLoadThread(int startIndex, int endIndex, String path)
+	{
+		super();
+		this.startIndex = startIndex;
+		this.endIndex = endIndex;
+		this.path = path;
+	}
+	
+	@Override
+	public void run()
+	{
+		try
+		{
+			URL url=new URL(path);
+			HttpURLConnection connection=(HttpURLConnection) url.openConnection();
+			connection.setRequestMethod("GET");
+			connection.setRequestProperty("Range", "bytes="+startIndex+"-"+endIndex);
+			int code=connection.getResponseCode();
+			if(code==206)
+			{
+				
+				InputStream is=connection.getInputStream();
+				RandomAccessFile raf=new RandomAccessFile("D:/1.exe", "rwd");
+				raf.seek(startIndex);
+				int len=0;
+				byte []buffer=new byte[1024];
+				while((len=(is.read(buffer)))!=-1)
+				{
+					raf.write(buffer,0, len);
+				}
+			}
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+	}
+}
+
+
+
+
+
+
+

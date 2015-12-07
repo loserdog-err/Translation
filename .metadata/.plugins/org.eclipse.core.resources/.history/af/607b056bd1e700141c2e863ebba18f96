@@ -1,0 +1,44 @@
+package com.cataipq.main;
+
+import android.support.v7.app.ActionBarActivity;
+import android.content.ContentResolver;
+import android.database.Cursor;
+import android.net.Uri;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+
+public class MainActivity extends ActionBarActivity
+{
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState)
+	{
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+	}
+
+	public void read(View view)
+	{
+		Uri uri=Uri.parse("content://com.android.contacts/raw_contacts");
+		Uri dataUri=Uri.parse("content://com.android.contacts/data");
+		
+		ContentResolver resolver=getContentResolver();
+		Cursor cursor=resolver.query(uri, null, null, null, null);
+		String[] cs=cursor.getColumnNames();
+//		for(String c:cs)
+//		{
+//			System.out.println(c);
+//		}
+//		System.out.println("-----------------------------------------");
+		while(cursor.moveToNext())
+		{
+			int id=cursor.getInt(cursor.getColumnIndex("contact_id"));
+			Cursor dataCursor=resolver.query(dataUri, null, "contact_id=?", new String[]{id+""}, null);
+			
+			
+		}
+	}
+
+}

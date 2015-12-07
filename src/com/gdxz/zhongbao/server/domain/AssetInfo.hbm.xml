@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+
+<hibernate-mapping package="com.gdxz.zhongbao.server.domain">
+
+ <class name="AssetInfo" dynamic-insert="true" table="assetInfo">
+
+  <id name="id">
+   <generator class="native" />
+  </id>
+
+  <property name="todayPay" type="float"></property>
+  <property name="oneAgoPay" type="float"></property>
+  <property name="twoAgoPay" type="float"></property>
+  <property name="threeAgoPay" type="float"></property>
+  <property name="fourAgoPay" type="float"></property>
+  <property name="fiveAgoPay" type="float"></property>
+  <property name="sixAgoPay" type="float"></property>
+  <property name="monthPay" type="float"></property>
+  <property name="totalPay" type="float"></property>
+
+  <!--user属性，本类与User类多对一的映射关系 -->
+  <many-to-one name="user" class="User" column="userId" lazy="false"></many-to-one>
+ </class>
+
+</hibernate-mapping>

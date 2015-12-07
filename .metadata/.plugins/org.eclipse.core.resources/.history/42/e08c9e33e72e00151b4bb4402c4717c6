@@ -1,0 +1,16 @@
+package com.cataipq.text;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class Text
+{
+	public static void main(String[] args) throws Exception
+	{
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+		Date date = new Date(mill);
+		String result=sdf.format(date);
+		System.out.println(result);
+
+	}
+}

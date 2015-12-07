@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+
+<hibernate-mapping package="com.gdxz.zhongbao.server.domain">
+
+ <class name="ApplicationList" dynamic-insert="true" table="applicationList">
+
+  <id name="id">
+   <generator class="native" />
+  </id>
+
+  <property name="applyTime" type="timestamp" />
+  <property name="isHandle" type="boolean" />
+
+  <!--team属性，本类与Team多对一的映射关系 -->
+  <many-to-one name="team" class="Team" lazy="false" column="teamId" 
+   cascade="all"
+  ></many-to-one>
+  <!--user属性，本类与User多对一的映射关系 -->
+  <many-to-one name="user" class="User" lazy="false" column="userId"
+   cascade="all"
+  ></many-to-one>
+ </class>
+
+</hibernate-mapping>

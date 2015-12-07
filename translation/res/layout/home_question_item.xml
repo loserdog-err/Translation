@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@drawable/change_selector"
+              android:orientation="vertical"
+              android:paddingLeft="@dimen/x5"
+              android:paddingRight="@dimen/x5">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y3"
+        >
+
+        <ImageView
+            android:id="@+id/iv_user"
+            android:layout_width="@dimen/x20"
+            android:layout_height="@dimen/y20"
+            android:src="@drawable/user"/>
+
+        <TextView
+            android:id="@+id/tv_questioner"
+            style="@style/font1_black_normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y5"
+            android:layout_marginLeft="@dimen/x5"
+            android:layout_toRightOf="@id/iv_user"
+            android:text="陈岸涛"
+            android:textColor="@android:color/holo_blue_light"/>
+
+
+        <ImageView
+            android:id="@+id/iv_have_solve"
+            android:layout_width="@dimen/x100"
+            android:layout_height="@dimen/y30"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/x10"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/tv_solve"
+            style="@style/font2_black_normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/x20"
+            android:text="500"
+            android:layout_centerVertical="true"
+            android:textColor="@color/orange"/>
+
+        <ImageView
+            android:id="@+id/iv_solve_icon"
+            android:layout_width="@dimen/x30"
+            android:layout_height="@dimen/y25"
+            android:layout_marginRight="@dimen/x2"
+            android:layout_toLeftOf="@id/tv_solve"
+            android:background="@drawable/money"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_title"
+        style="@style/font1_black_bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x5"
+        android:layout_marginTop="@dimen/y5"
+        android:text="请问如何装逼？"/>
+
+    <TextView
+        android:id="@+id/tv_content"
+        style="@style/font1_gray_normal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x5"
+        android:layout_marginTop="@dimen/y8"
+        android:text="请问如何装逼？请问如何装逼？请问如何装逼？请问如何装逼？请问如何装逼？"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y10"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/x15"
+            android:layout_height="@dimen/y15"
+            android:src="@android:drawable/ic_menu_view"/>
+
+        <TextView
+            android:id="@+id/tv_browse_count"
+            style="@style/font1_gray_normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="250"/>
+
+        <ImageView
+            android:layout_width="@dimen/x15"
+            android:layout_height="@dimen/y15"
+            android:layout_marginLeft="@dimen/x5"
+            android:src="@android:drawable/sym_action_chat"/>
+
+        <TextView
+            android:id="@+id/tv_reply_count"
+            style="@style/font1_gray_normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="250"/>
+    </LinearLayout>
+
+</LinearLayout>

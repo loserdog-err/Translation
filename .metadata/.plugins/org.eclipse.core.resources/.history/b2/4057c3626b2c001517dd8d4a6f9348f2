@@ -1,0 +1,10 @@
+package com.cataipq.text;
+
+
+public class Text
+{
+	public static void main(String[] args) throws Exception
+	{
+		System.out.println(1+4+"");
+	}
+}

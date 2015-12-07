@@ -1,0 +1,127 @@
+package com.cataipq.main;
+
+import android.R.color;
+import android.R.integer;
+import android.content.Context;
+import android.graphics.Color;
+import android.util.AttributeSet;
+import android.util.TypedValue;
+import android.view.Gravity;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+public class FragmentIndicator extends LinearLayout implements
+		View.OnClickListener
+{
+	private int defaultIndicator = 0;
+	private static int currentIndicator;
+	private OnIndicatorListener indicatorListener;
+	private static final String TAG_ICON_0 = "icon_tag_0";
+	private static final String TAG_ICON_1 = "icon_tag_1";
+	private static final String TAG_ICON_2 = "icon_tag_2";
+
+	private static final String TAG_TEXT_0 = "text_tag_0";
+	private static final String TAG_TEXT_1 = "text_tag_1";
+	private static final String TAG_TEXT_2 = "text_tag_2";
+	private static final int COLOR_UNSELECT = Color.argb(100, 0xff, 0xff, 0xff);
+	private static final int COLOR_SELECT = Color.WHITE;
+
+	private static View[] indicators;
+
+	
+	
+	public FragmentIndicator(Context context, AttributeSet attrs)
+	{
+		super(context, attrs);
+		currentIndicator = defaultIndicator;
+		setOrientation(HORIZONTAL);
+		init();
+	}
+
+	public View createIndicator(int iconId, String text, int color,
+			String iconTag, String textTag)
+	{
+		LinearLayout view = new LinearLayout(getContext());
+		view.setOrientation(VERTICAL);
+		view.setLayoutParams(new LinearLayout.LayoutParams(
+				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, 1));
+		view.setGravity(Gravity.CENTER_HORIZONTAL);
+
+		// 图标
+		ImageView iconView = new ImageView(getContext());
+		iconView.setTag(iconTag);
+		iconView.setLayoutParams(new LinearLayout.LayoutParams(
+				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, 1));
+		iconView.setImageResource(iconId);
+		// 文字
+		TextView textView = new TextView(getContext());
+		textView.setTag(textTag);
+		textView.setText(text);
+		textView.setTextColor(color);
+		textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+		textView.setLayoutParams(new LinearLayout.LayoutParams(
+				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+
+		view.addView(iconView);
+		view.addView(textView);
+		return view;
+	}
+
+	public void init()
+	{
+		indicators = new View[3];
+		// 首页界面
+		indicators[0] = createIndicator(R.drawable.home, "首页", COLOR_SELECT,
+				TAG_ICON_0, TAG_TEXT_0);
+		indicators[0].setBackgroundColor(Color.BLACK);
+		indicators[0].setTag(Integer.valueOf(0));
+		indicators[0].setOnClickListener(this);
+
+		// 搜索界面
+		indicators[1] = createIndicator(R.drawable.search, "搜索",
+				COLOR_UNSELECT, TAG_ICON_1, TAG_TEXT_1);
+		indicators[1].setBackgroundColor(Color.GRAY);
+		indicators[1].setTag(Integer.valueOf(1));
+		indicators[1].setOnClickListener(this);
+
+		// 设置界面
+		indicators[2] = createIndicator(R.drawable.setting, "帮助",
+				COLOR_UNSELECT, TAG_ICON_2, TAG_TEXT_2);
+		indicators[2].setBackgroundColor(Color.GRAY);
+		indicators[2].setTag(Integer.valueOf(2));
+		indicators[2].setOnClickListener(this);
+		
+		addView(indicators[0]);
+		addView(indicators[1]);
+		addView(indicators[2]);
+		
+
+	}
+
+	public static void setIndicator(int which)
+	{
+		indicators[currentIndicator].setBackgroundColor(Color.GRAY);
+		indicators[which].setBackgroundColor(Color.BLACK);
+		currentIndicator = which;
+	}
+	
+	public interface OnIndicatorListener
+	{
+		public void click(View v);
+	}
+	
+	public void setIndicatorListener(OnIndicatorListener indicatorListener)
+	{
+		this.indicatorListener=indicatorListener;
+	}
+
+	@Override
+	public void onClick(View v)
+	{
+		indicatorListener.click(v);
+
+	}
+
+}

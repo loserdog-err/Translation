@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:padding="@dimen/x5">
+
+    <TextView
+        android:id="@+id/tv_postTime"
+        style="@style/font1_gray_normal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="2015-7-4 16:04:00"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x3"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <com.gdxz.zhongbao.client.view.customView.RoundImageView
+                android:id="@+id/iv_avatar"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/head"/>
+
+            <TextView
+                android:id="@+id/tv_text"
+                style="@style/font1_black_normal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/chatfrom_bg_normal"
+                android:text="你好，我叫狗晴，我是你的狗！"
+                />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_author"
+            style="@style/font1_gray_normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x3"
+            android:text="爹"/>
+    </LinearLayout>
+
+</LinearLayout>

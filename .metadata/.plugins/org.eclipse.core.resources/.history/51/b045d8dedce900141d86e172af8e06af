@@ -1,0 +1,34 @@
+package com.cataipq.main;
+
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.RequestParams;
+
+import android.support.v7.app.ActionBarActivity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+
+public class MainActivity extends ActionBarActivity
+{
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState)
+	{
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+		
+	}
+	
+	public void request(View view)
+	{
+		AsyncHttpClient httpClient=new AsyncHttpClient();
+		RequestParams params=new RequestParams();
+		params.add("username", "cataipq");
+		params.add("password", "20140107");
+		httpClient.post(this, "http://192.168.188.73:8080/Login/UserServlet", params,new )
+		httpClient.post
+	}
+
+
+}

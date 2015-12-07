@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+
+<hibernate-mapping package="com.gdxz.zhongbao.server.domain">
+
+ <class name="UserRemind" dynamic-insert="true" table="userRemind">
+
+  <id name="id">
+   <generator class="native" />
+  </id>
+
+  <property name="type" type="integer"></property>
+  <property name="isRead" type="boolean"></property>
+  <property name="remindTime" type="timestamp"></property>
+
+  <!--user属性，本类与User类多对一的映射关系 -->
+  <many-to-one name="user" class="User" column="userId" lazy="false"
+   cascade="all" />
+  <!--answer属性，本类与Answer多对一的映射关系 -->
+  <many-to-one name="answer" class="Answer" column="answerId"
+   lazy="false" cascade="all" />
+
+ </class>
+
+</hibernate-mapping>

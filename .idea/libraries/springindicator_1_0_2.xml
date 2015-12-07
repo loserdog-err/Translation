@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="springindicator-1.0.2">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/translation/build/intermediates/exploded-aar/com.github.chenupt.android/springindicator/1.0.2/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/translation/build/intermediates/exploded-aar/com.github.chenupt.android/springindicator/1.0.2/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.chenupt.android/springindicator/1.0.2/a3f538e8002360c69991390acfe41148ff6081af/springindicator-1.0.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

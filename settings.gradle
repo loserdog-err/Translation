@@ -1,0 +1,2 @@
+include ':library', ':slide_library', ':guilotine_menu_library'
+include ':translation'

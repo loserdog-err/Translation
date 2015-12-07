@@ -1,0 +1,327 @@
+package com.gdxz.zhongbao.client.Service.impl;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.nfc.Tag;
+import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Message;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.SpannedString;
+import android.text.style.ImageSpan;
+import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
+
+import com.gdxz.zhongbao.client.Service.QuestionService;
+import com.gdxz.zhongbao.client.domain.Answer;
+import com.gdxz.zhongbao.client.domain.Question;
+import com.gdxz.zhongbao.client.domain.UploadConstant;
+import com.gdxz.zhongbao.client.domain.User;
+import com.gdxz.zhongbao.client.utils.DateUtils;
+import com.gdxz.zhongbao.client.utils.HttpUtils;
+import com.gdxz.zhongbao.client.utils.JsonUtils;
+import com.gdxz.zhongbao.client.view.activity.HomeActivity;
+import com.gdxz.zhongbao.client.view.activity.MainActivity;
+import com.gdxz.zhongbao.client.view.activity.PersonalSettingActivity;
+import com.gdxz.zhongbao.client.view.activity.QuestionDetailActivity;
+import com.gdxz.zhongbao.client.view.activity.WriteMessage;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.handmark.pulltorefresh.library.R.string;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.assist.ImageSize;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+
+public class QuestionServiceImpl implements QuestionService
+{
+	// 服务器返回的json
+	JSONObject jsonObject;
+
+	JSONArray jsonArray;
+	final SpannableString spannableString = new SpannableString("");
+
+	/**
+	 * 加载问题数据
+	 */
+	public void loadQuestionData(final Handler handler, final String pageNow,
+			final String category, final int action,
+			final PullToRefreshListView pullToRefreshListView)
+	{
+		new AsyncTask<java.lang.Void, java.lang.Void, java.util.List<Question>>()
+		{
+			@Override
+			protected List<Question> doInBackground(Void... params)
+			{
+				String url = HttpUtils.BASE_URL + "QuestionServlet";
+				Map<String, String> rawParams = new HashMap<>();
+				rawParams.put("method", "loadQuestionData");
+				rawParams.put("pageNow", pageNow);
+				rawParams.put("category", category);
+				try
+				{
+					jsonObject = new JSONObject(
+							HttpUtils.postRequest(url, rawParams));
+					if (jsonObject.getBoolean("isSuccess"))
+					{
+						jsonArray = jsonObject.getJSONArray("questionData");
+						// 将数据封装成list
+						List<Question> list = new ArrayList<>();
+						for (int i = 0; i < jsonArray.length(); i++)
+						{
+							JSONObject object = jsonArray.getJSONObject(i);
+							// 取出json中的user属性并移除author属性
+							User author = (User) JsonUtils.toBean(
+									object.getJSONObject("author"), User.class);
+							object.remove("author");
+							// 将json转换为question对象
+							Question question = (Question) JsonUtils.toBean(object,
+									Question.class);
+							question.setAuthor(author);
+							// System.out.println(question.getReplyCount());
+							list.add(question);
+						}
+						return list;
+					} else
+					{
+						return null;
+					}
+
+				} catch (Exception e)
+				{
+					e.printStackTrace();
+					return null;
+				}
+			}
+
+			@Override
+			protected void onPostExecute(List<Question> result)
+			{
+				if (result != null)
+				{
+
+					Message msg = new Message();
+					if (action == HomeActivity.REFRESH_DATA)
+					{
+						msg.what = HomeActivity.REFRESH_DATA;
+					} else if (action == HomeActivity.ADD_MORE_DATA)
+					{
+						msg.what = HomeActivity.ADD_MORE_DATA;
+					}
+					msg.obj = result;
+					handler.sendMessage(msg);
+					pullToRefreshListView.onRefreshComplete();
+				} else
+				{
+
+					Message msg = new Message();
+					msg.what = HomeActivity.SERVER_ERROR;
+					handler.sendMessage(msg);
+				}
+			}
+		}.execute();
+	}
+
+	/**
+	 * 加载服务器端的详细数据
+	 */
+	public void loadQuestionDetailData(final Handler handler,
+			final String questionId, final String pageNow,
+			final PullToRefreshListView pullToRefreshListView)
+	{
+		new AsyncTask<java.lang.Void, java.lang.Void, Map<String, Object>>()
+		{
+
+			@Override
+			protected Map<String, Object> doInBackground(Void... params)
+			{
+				String url = HttpUtils.BASE_URL + "QuestionServlet";
+				Map<String, String> rawParams = new HashMap<>();
+				rawParams.put("method", "loadQuestionDetailData");
+				rawParams.put("pageNow", pageNow);
+				rawParams.put("questionId", questionId);
+				try
+				{
+					jsonObject = new JSONObject(
+							HttpUtils.postRequest(url, rawParams));
+					if (jsonObject.getBoolean("isSuccess"))
+					{
+						Gson gson = new GsonBuilder().serializeNulls().create();
+						JSONObject questionJson = jsonObject
+								.getJSONObject("question");
+						// 转换为Question对象
+						Question question = gson.fromJson(questionJson.toString(),
+								Question.class);
+						System.out.println("提问题作者："
+								+ question.getAuthor().getUsername());
+						// 取出answers的json，并转换为list<Answer>
+						List<Answer> answers = gson.fromJson(jsonObject
+								.getJSONArray("answers").toString(),
+								new TypeToken<List<Answer>>()
+								{
+								}.getType());
+						// 封装成map
+						Map<String, Object> data = new HashMap<>();
+						data.put("question", question);
+						data.put("answers", answers);
+						return data;
+					}
+
+				} catch (Exception e)
+				{
+					e.printStackTrace();
+					return null;
+				}
+				return null;
+			}
+
+			protected void onPostExecute(java.util.Map<String, Object> result)
+			{
+				if (result != null && result.size() > 0)
+				{
+					Message msg = new Message();
+					msg.what = QuestionDetailActivity.TEXT_DATA_LOAD_COMPLATE;
+					msg.obj = result;
+					handler.sendMessage(msg);
+				} else
+				{
+					Message msg = new Message();
+					msg.what = QuestionDetailActivity.SERVER_ERROR;
+					handler.sendMessage(msg);
+				}
+
+			};
+
+		}.execute();
+	}
+
+	/**
+	 * 发布一个问题
+	 */
+	@Override
+	public void postQuestion(final Handler handler, final String questionContent,
+			final String userId, final String rewardAmount, final String title,
+			final String[] paths)
+	{
+		new AsyncTask<java.lang.Void, java.lang.Void, Boolean>()
+		{
+			@Override
+			protected Boolean doInBackground(Void... params)
+			{
+				// String url = HttpUtils.BASE_URL + "QuestionServlet";
+				// Map<String, String> rawParams = new HashMap<>();
+				// rawParams.put("method", "postQuestion");
+				// rawParams.put("questionContent", questionContent);
+				// rawParams.put("rewardAmount", rewardAmount);
+				// rawParams.put("title", title);
+				// rawParams.put("userId", userId);
+				// try
+				// {
+				// jsonObject = new JSONObject(
+				// HttpUtils.postRequest(url, rawParams));
+				// if (jsonObject.getBoolean("isSuccess"))
+				// {
+				// return true;
+				// }
+				// } catch (Exception e)
+				// {
+				// e.printStackTrace();
+				// return false;
+				// }
+				String url = HttpUtils.BASE_URL + "UploadFileServlet";
+				Map<String, String> rawParams = new HashMap<>();
+				rawParams.put("userId", userId + "");
+				rawParams.put("rewardAmount", rewardAmount);
+				rawParams.put("title", title);
+				rawParams.put("questionContent", questionContent);
+				rawParams.put("category", UploadConstant.CATEGORY_WRITE_QUESTION);
+				List<File> files = new ArrayList<>();
+				if (paths != null && paths.length > 0)
+				{
+					for (int i = 0; i < paths.length; i++)
+					{
+						File file = new File(paths[i]);
+						files.add(file);
+					}
+				}
+
+				if (HttpUtils.upLoadFile(url, files, rawParams))
+				{
+					return true;
+				}
+
+				return false;
+			}
+
+			@Override
+			protected void onPostExecute(Boolean result)
+			{
+				Message msg = new Message();
+				if (result)
+				{
+					msg.what = WriteMessage.WRITE_QUESTION;
+				} else
+				{
+					msg.what = WriteMessage.SERVER_ERROR;
+				}
+				handler.sendMessage(msg);
+			}
+		}.execute();
+
+	}
+
+	@Override
+	public void loadQuestionImage(final TextView tvContent, String path,
+			final int start, final int end,SpannableString spannableString)
+	{
+		String url = HttpUtils.BASE_URL + path;
+		ImageSize size = new ImageSize(50, 50);
+		ImageLoader.getInstance().loadImage(url, size, new ImageLoadingListener()
+		{
+			@Override
+			public void onLoadingStarted(String arg0, View arg1)
+			{
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void onLoadingFailed(String arg0, View arg1, FailReason arg2)
+			{
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void onLoadingComplete(String arg0, View arg1, Bitmap bitmap)
+			{
+				Log.e("TAG", start + " " + end);
+				Log.e("TAG", "content:" + tvContent.getText().toString());
+				spannableString.setSpan(
+						new ImageSpan(tvContent.getContext(), bitmap), start, end,
+						Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+				tvContent.setText(spannableString, TextView.BufferType.SPANNABLE);
+			}
+
+			@Override
+			public void onLoadingCancelled(String arg0, View arg1)
+			{
+				// TODO Auto-generated method stub
+
+			}
+		});
+	}
+}

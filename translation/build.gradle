@@ -1,0 +1,109 @@
+apply plugin: 'android'
+
+dependencies {
+    compile fileTree(dir: 'libs', include: '*.jar')
+        compile 'com.android.support:appcompat-v7:22.2.1'
+//    compile 'com.android.support:appcompat-v7:21.0.3'
+    compile 'com.android.support:support-v4:22.2.1'
+    compile project(':library')
+    compile files('libs/jmessage-android-1.1.1.jar')
+    compile files('libs/picasso-2.4.0.jar')
+    compile files('libs/universal-image-loader-1.9.4.jar')
+    // MaterialDesign
+    compile 'com.github.navasmdc:MaterialDesign:1.+@aar'
+    //侧滑菜单
+    compile project(':slide_library')
+    //viewpager指示器
+    compile 'com.github.chenupt.android:springindicator:1.0.2@aar'
+    compile 'com.github.chenupt.android:multiplemodel:1.1.0@aar'
+    //title变化的侧滑菜单
+    compile 'com.ikimuhendis:ldrawer:0.1'
+    compile files('libs/xUtils-2.6.14.jar')
+    //switch按钮
+    compile 'me.xiaopan:switchbutton:1.2.0'
+    //shareSDK需要的jar文件
+    compile files('libs/ShareSDK-ShortMessage-2.6.2.jar')
+    compile files('libs/MobLogCollector.jar')
+    compile files('libs/ShareSDK-SinaWeibo-2.6.2.jar')
+    compile files('libs/ShareSDK-Wechat-Core-2.6.2.jar')
+    compile files('libs/ShareSDK-QQ-2.6.2.jar')
+    compile files('libs/MobTools.jar')
+    compile files('libs/ShareSDK-Wechat-Favorite-2.6.2.jar')
+    compile files('libs/ShareSDK-Wechat-2.6.2.jar')
+    compile files('libs/ShareSDK-Core-2.6.2.jar')
+    compile files('libs/ShareSDK-Wechat-Moments-2.6.2.jar')
+    compile files('libs/ShareSDK-Email-2.6.2.jar')
+    compile files('libs/ShareSDK-Facebook-2.6.2.jar')
+    compile files('libs/ShareSDK-QZone-2.6.2.jar')
+    compile files('libs/ShareSDK-TencentWeibo-2.6.2.jar')
+    compile files('libs/ShareSDK-Twitter-2.6.2.jar')
+    //交易activity的menu
+    compile project(':guilotine_menu_library')
+    //资产分析activity的柱状图
+    compile 'com.github.lecho:hellocharts-library:1.5.5@aar'
+    //流水账activity可删除的listview
+    compile 'com.baoyz.swipemenulistview:library:1.2.1'
+    compile files('libs/alipaysdk.jar')
+    compile files('libs/alipaysecsdk.jar')
+    compile files('libs/alipayutdid.jar')
+    compile files('libs/BmobPay_V1.0.2.jar')
+}
+
+android {
+    compileSdkVersion 21
+    buildToolsVersion "21.1.2"
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 21
+        versionCode 1
+        versionName "1.0"
+    }
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+
+    task nativeLibsToJar(type: Zip, description: "create a jar archive of the native libs") {
+        destinationDir file("$projectDir/libs")
+        baseName "Native_Libs2"
+        extension "jar"
+        from fileTree(dir: "libs", include: "**/*.so")
+        into "lib"
+    }
+
+    tasks.withType(JavaCompile) {
+        compileTask -> compileTask.dependsOn(nativeLibsToJar)
+    }
+
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            java.srcDirs = ['src']
+            resources.srcDirs = ['src']
+            aidl.srcDirs = ['src']
+            renderscript.srcDirs = ['src']
+            res.srcDirs = ['res']
+            assets.srcDirs = ['assets']
+        }
+
+        // Move the tests to tests/java, tests/res, etc...
+        instrumentTest.setRoot('tests')
+
+        // Move the build types to build-types/<type>
+        // For instance, build-types/debug/java, build-types/debug/AndroidManifest.xml, ...
+        // This moves them out of them default location under src/<type>/... which would
+        // conflict with src/ being used by the main source set.
+        // Adding new build types or product flavors should be accompanied
+        // by a similar customization.
+        debug.setRoot('build-types/debug')
+        release.setRoot('build-types/release')
+    }
+}

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/ll_best_answer"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="@dimen/x1"
+    android:layout_marginRight="@dimen/x1"
+    android:background="@color/bg_gray"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/x5"
+    android:paddingRight="@dimen/x5">
+
+    <!-- 包裹回答者信息和最佳答案 -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y5"
+        android:orientation="horizontal">
+
+        <!-- 头像 -->
+
+        <com.gdxz.zhongbao.client.view.customView.RoundImageView
+            android:id="@+id/iv_answer_head"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/head"/>
+        <!-- 姓名 -->
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x3"
+            android:layout_toRightOf="@id/iv_answer_head"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_answer_name"
+                style="@style/font1_black_normal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="潘晴"/>
+
+            <TextView
+
+                android:id="@+id/tv_answer_team"
+                style="@style/font1_black_normal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y3"
+                android:text=""/>
+        </LinearLayout>
+
+
+        <!--采纳为最佳答案的按钮-->
+        <Button
+            style="@style/font1_black_normal"
+            android:id="@+id/btn_adopt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/best_answer_selector"
+            android:minHeight="@dimen/y25"
+            android:text="采纳"
+            android:visibility="gone"/>
+    </RelativeLayout>
+
+    <!-- 回答内容 -->
+
+
+    <TextView
+        android:id="@+id/tv_answer_content"
+        style="@style/font1_gray_normal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y10"
+        android:layout_marginBottom="@dimen/y10"
+        android:text="唉"/>
+
+    <!-- 赞，鄙视 -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y4"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/x5">
+        <!--<ImageView-->
+        <!--android:layout_width="@dimen/x20"-->
+        <!--android:layout_height="@dimen/y20"-->
+        <!--android:src="@drawable/praise" />-->
+
+        <TextView
+            android:id="@+id/tv_answer_praise"
+            style="@style/font1_black_normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/change_selector"
+            android:drawableLeft="@drawable/praise"
+            android:text="(250)"
+            android:textColor="@android:color/black"/>
+
+        <!--<ImageView-->
+        <!--android:layout_width="@dimen/x20"-->
+        <!--android:layout_height="@dimen/y20"-->
+        <!--android:layout_marginLeft="@dimen/x5"-->
+        <!--android:src="@drawable/despise" />-->
+
+        <TextView
+            android:id="@+id/tv_answer_despise"
+            style="@style/font1_black_normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/change_selector"
+            android:drawableLeft="@drawable/despise"
+            android:gravity="center"
+            android:text="(250)"
+            android:textColor="@android:color/black"/>
+
+        <!-- 回答时间 -->
+        <TextView
+            android:id="@+id/tv_answer_postTime"
+            style="@style/font1_gray_normal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x80"
+            android:gravity="right"
+            android:text="2015-5-26"/>
+    </LinearLayout>
+
+</LinearLayout>

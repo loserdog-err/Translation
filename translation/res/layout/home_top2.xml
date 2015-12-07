@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@android:color/white"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y30"
+        android:gravity="center_vertical"
+        android:background="@android:color/darker_gray"
+        >
+
+
+        <TextView
+            android:id="@+id/tv_newly_question"
+            style="@style/font1_black_normal"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:text="最新提问"/>
+
+
+        <TextView
+            android:gravity="center"
+            android:id="@+id/tv_today_hot_ranking"
+            style="@style/font1_black_normal"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="今日热榜"/>
+
+
+        <TextView
+            android:gravity="center"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:id="@+id/tv_total_ranking"
+            style="@style/font1_black_normal"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="总排行榜"/>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_tabline"
+        android:layout_width="@dimen/x107"
+        android:layout_height="@dimen/y5"
+        android:background="@android:color/holo_blue_dark"/>
+
+    <TextView
+        android:id="@+id/open_network"
+        style="@style/font1_black_normal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_orange_light"
+        android:gravity="center"
+        android:paddingBottom="@dimen/y3"
+        android:paddingTop="@dimen/y3"
+        android:text="未打开网络连接，点击打开"
+        android:visibility="gone"/>
+</LinearLayout>
+
+

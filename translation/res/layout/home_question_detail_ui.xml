@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/bg_gray"
+              android:orientation="vertical">
+
+    <include layout="@layout/common_title"/>
+
+    <com.gdxz.zhongbao.client.view.customView.MyScrollView
+        android:id="@+id/sv_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <!-- 问题标题 -->
+            <TextView
+                android:id="@+id/tv_question_title"
+                style="@style/font2_black_normal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/y5"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="@dimen/y3"
+                android:background="@android:color/darker_gray"/>
+            <!-- 包裹用户信息以及悬赏金额 -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y5"
+                android:paddingLeft="@dimen/x10"
+                android:paddingRight="@dimen/x10">
+
+                <!-- 包裹用户信息 -->
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <!-- 头像 -->
+
+                    <com.gdxz.zhongbao.client.view.customView.RoundImageView
+                        android:id="@+id/iv_questioner_head"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/head"/>
+                    <!-- 姓名性别 -->
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x5"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_questioner_name"
+                            style="@style/font1_gray_normal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@android:color/holo_blue_light"/>
+
+                        <TextView
+                            android:id="@+id/tv_questioner_gender"
+                            style="@style/font1_gray_normal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            />
+                    </LinearLayout>
+                </LinearLayout>
+                <!-- 悬赏 -->
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:visibility="gone"
+                        android:id="@+id/iv_reward_amount"
+                        android:layout_width="@dimen/x30"
+                        android:layout_height="@dimen/y25"
+                        android:src="@drawable/money"/>
+
+                    <ImageView
+                        android:id="@+id/iv_solve"
+                        android:src="@drawable/have_solve"
+                        android:layout_width="@dimen/x100"
+                        android:layout_height="@dimen/y40"
+                        android:visibility="gone"/>
+
+                    <TextView
+                        android:visibility="gone"
+                        android:id="@+id/tv_reward_amount"
+                        style="@style/font2_black_normal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:textColor="@android:color/holo_red_light"/>
+                </LinearLayout>
+            </RelativeLayout>
+
+
+            <!-- 问题内容 -->
+
+            <TextView
+                android:id="@+id/tv_question_content"
+                style="@style/font1_gray_normal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x5"
+                android:layout_marginRight="@dimen/x5"
+                android:layout_marginTop="@dimen/y5"
+                />
+            <!-- 问题中的图片和语音 -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y5"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+                <!-- 图片 -->
+
+                <LinearLayout
+                    android:id="@+id/ll_question_image"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y5"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:layout_width="@dimen/x30"
+                        android:layout_height="@dimen/y30"
+                        android:layout_marginLeft="@dimen/x10"/>
+
+                    <ImageView
+                        android:layout_width="@dimen/x30"
+                        android:layout_height="@dimen/y30"
+                        android:layout_marginLeft="@dimen/x10"/>
+
+                    <ImageView
+                        android:layout_width="@dimen/x30"
+                        android:layout_height="@dimen/y30"
+                        android:layout_marginLeft="@dimen/x10"/>
+                </LinearLayout>
+                <!-- 语音 -->
+
+                <include
+                    android:id="@+id/rl_play_voice_ui"
+                    layout="@layout/play_voice_ui"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.7"
+                    android:visibility="invisible"/>
+            </LinearLayout>
+
+            <!-- 问题发布时间 -->
+
+            <TextView
+                android:id="@+id/tv_question_postTime"
+                style="@style/font1_gray_normal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x5"
+                android:layout_marginRight="@dimen/x5"
+                android:layout_marginTop="@dimen/y10"
+                android:gravity="right"
+                android:text="2015-5-26"/>
+
+            <!-- 快捷操作栏(关注，回复)等 -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y3"
+                android:paddingLeft="@dimen/x5">
+
+                <ImageView
+                    android:id="@+id/iv_follow"
+                    android:layout_width="@dimen/x20"
+                    android:layout_height="@dimen/y20"
+                    android:src="@android:drawable/star_big_on"/>
+
+                <TextView
+                    android:id="@+id/tv_follow"
+                    style="@style/font1_black_normal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/change_selector"
+                    android:text="收藏"/>
+
+                <ImageView
+                    android:layout_width="@dimen/x20"
+                    android:layout_height="@dimen/y20"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/x5"
+                    android:src="@android:drawable/ic_menu_edit"/>
+
+                <TextView
+                    android:id="@+id/tv_answer_questioner"
+                    style="@style/font1_black_normal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/change_selector"
+                    android:text="回复"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="@dimen/y3"
+                android:background="@android:color/darker_gray"/>
+
+            <!-- 最佳答案 -->
+            <LinearLayout
+                android:id="@+id/ll_best_answer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x1"
+                android:layout_marginRight="@dimen/x1"
+                android:layout_marginTop="@dimen/y5"
+                android:background="@drawable/voice_wrap"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/x5"
+                android:paddingRight="@dimen/x5"
+                android:visibility="visible">
+
+
+                <!-- 包裹回答者信息和最佳答案 -->
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/x10"
+                    android:paddingRight="@dimen/x10"
+                    >
+
+                    <!-- 头像和姓名 -->
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/y5"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <!-- 头像 -->
+
+                        <com.gdxz.zhongbao.client.view.customView.RoundImageView
+                            android:id="@+id/iv_best_answer_head"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/head"/>
+                        <!-- 姓名 团队-->
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/x3"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tv_best_answer_name"
+                                style="@style/font1_gray_normal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@android:color/holo_blue_light"/>
+
+                            <TextView
+                                android:id="@+id/tv_best_answer_team"
+                                style="@style/font1_black_normal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/y3"
+                                />
+                        </LinearLayout>
+                    </LinearLayout>
+                    <!-- 最佳答案 -->
+
+                    <ImageView
+                        android:layout_width="@dimen/x90"
+                        android:layout_height="@dimen/y30"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="@dimen/y5"
+                        android:src="@drawable/best_answer"/>
+                </RelativeLayout>
+
+                <!-- 回答内容 -->
+
+                <TextView
+                    android:id="@+id/tv_best_answer_content"
+                    style="@style/font1_gray_normal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y5"
+                    />
+                <!-- 回答时间 -->
+
+                <TextView
+                    android:id="@+id/tv_best_answer_postTime"
+                    style="@style/font1_gray_normal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y10"
+                    android:gravity="right"
+                    />
+                <!-- 赞，鄙视 -->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y2"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/x5">
+
+                    <TextView
+                        android:id="@+id/tv_best_answer_praise"
+                        style="@style/font1_black_normal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/change_selector"
+                        android:drawableLeft="@drawable/praise"
+                        android:textColor="@android:color/black"/>
+
+                    <TextView
+                        android:id="@+id/tv_best_answer_despise"
+                        style="@style/font1_black_normal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/change_selector"
+                        android:drawableLeft="@drawable/despise"
+                        android:textColor="@android:color/black"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <com.handmark.pulltorefresh.library.PullToRefreshListView
+                android:id="@+id/lv_answer"
+                xmlns:ptr="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y5"
+                android:divider="@android:color/darker_gray"
+                android:dividerHeight="@dimen/y1"
+                ptr:ptrAnimationStyle="flip"
+                >
+            </com.handmark.pulltorefresh.library.PullToRefreshListView>
+        </LinearLayout>
+    </com.gdxz.zhongbao.client.view.customView.MyScrollView>
+</LinearLayout>

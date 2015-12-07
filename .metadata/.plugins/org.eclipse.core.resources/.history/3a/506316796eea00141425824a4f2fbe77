@@ -1,0 +1,119 @@
+package com.cataipq.text;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.RandomAccessFile;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+public class TextMain
+{
+	public static final int THREAD_COUNT=3;
+	public static void main(String[] args)
+	{
+		String path="http://localhost:8080/Login/inst.exe";
+		try
+		{
+			URL url=new URL(path);
+			HttpURLConnection connection=(HttpURLConnection) url.openConnection();
+			connection.setRequestMethod("GET");
+			int code=connection.getResponseCode();
+			System.out.println(code);
+			if(code==200)
+			{
+				int length=connection.getContentLength();
+				System.out.println("文件大小："+length);
+				//每条线程下载的大小
+				int blockSize=length/THREAD_COUNT;
+				for(int i=1;i<=THREAD_COUNT;i++)
+				{
+					int startIndex=(i-1)*blockSize;
+					int endIndex=i*blockSize-1;
+					if(i==THREAD_COUNT)
+					{
+						//如果是最后一条线程
+						endIndex=length;
+					}
+					System.out.println("线程：  "+i+"  下载位置："+startIndex+" ——》"+endIndex);
+					new DownLoadThread(startIndex, endIndex, path,i).start();
+				}
+				
+			}
+		}
+		catch (Exception e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+}
+
+class DownLoadThread extends Thread
+{
+	private int startIndex;
+	private int endIndex;
+	private String path;
+	private int threadId;
+	
+	//文件已经下载到的位置
+	private int position=0;
+	public DownLoadThread(int startIndex, int endIndex, String path,
+			int threadId)
+	{
+		super();
+		this.startIndex = startIndex;
+		this.endIndex = endIndex;
+		this.path = path;
+		this.threadId = threadId;
+	}
+	@Override
+	public void run()
+	{
+		try
+		{
+			URL url=new URL(path);
+			HttpURLConnection connection=(HttpURLConnection) url.openConnection();
+			connection.setRequestMethod("GET");
+			connection.setRequestProperty("Range", "bytes="+startIndex+"-"+endIndex);
+			int code=connection.getResponseCode();
+			if(code==206)
+			{
+				//判断是否有断点下载的文件
+				File file=new File("D:/text/"+threadId+".txt");
+				if(file.exists())
+				{
+					InputStream is=new FileInputStream(file);
+					byte [] temp=new byte[1024];
+					position=is.read(temp);
+				}
+				
+				InputStream is=connection.getInputStream();
+				RandomAccessFile raf=new RandomAccessFile("D:/text/1.exe", "rwd");
+				raf.seek(startIndex);
+				int len=0;
+				byte []buffer=new byte[1024];
+				while((len=(is.read(buffer)))!=-1)
+				{
+					FileOutputStream fos=new FileOutputStream(new File("D:/text/"+threadId+".txt"));
+					raf.write(buffer,0, len);
+					fos.write(position+=len);
+					System.out.println("线程： "+threadId+" 写到第"+position+" 个字节");
+				}
+			}
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+	}
+}
+
+
+
+
+
+
+

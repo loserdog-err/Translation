@@ -1,0 +1,123 @@
+<resources>
+	
+    <color name="bbutton_danger">#ffd9534f</color>
+    <color name="title_background">#e01C86EE</color>
+    <color name="bg_white">#ffefecf5</color>
+    <color name="bg_gray">#fff5f5f5</color>
+    <color name="bg_light_blue">#ffd1f1ff</color>
+    <color name="orange">#ffff822d</color>
+    <color name="bbutton_danger_edge">#ffd43f3a</color>
+    <color name="bbutton_danger_pressed">#ffd2322d</color>
+    <color name="bbutton_danger_pressed_edge">#ffac2925</color>
+    <color name="bbutton_danger_disabled">#a5d9534f</color>
+    <color name="bbutton_danger_disabled_edge">#a5d43f3a</color>
+    <color name="bbutton_info">#ff5bc0de</color>
+    <color name="bbutton_info_edge">#ff46b8da</color>
+    <color name="bbutton_info_pressed">#ff39b3d7</color>
+    <color name="bbutton_info_pressed_edge">#ff269abc</color>
+    <color name="bbutton_info_disabled">#a55bc0de</color>
+    <color name="bbutton_info_disabled_edge">#a546b8da</color>
+
+    <color name="colorPrimary">#607d8b</color>
+    <color name="colorPrimaryDark">#455a64</color>
+    <color name="colorPrimaryLight">#cfd8dc</color>
+    <color name="colorAccent">#ffc107</color>
+
+    <color name="black_light">#99444444</color>
+    <color name="gray_dark">#616161</color>
+    <color name="gray_light">#9e9e9e</color>
+    <color name="brown">#5d4037</color>
+
+    <color name="indicator_1">#55B3C2</color>
+    <color name="indicator_2">#64A4A4</color>
+    <color name="indicator_3">#66D7B9</color>
+    <color name="indicator_4">#FDBC7D</color>
+
+    <color name="red">#FF0000</color>
+    <color name="yellow">#FFFF00</color>
+    <color name="grassgreen">#7fff00</color>
+    <color name="green">#00FF00</color>
+    <color name="freshgreen">#ff7f00</color>
+
+    <color name="Cyan">#00ffff</color>
+    <color name="brightblue">#007fff</color>
+    <color name="blue">#0000FF</color>
+    <color name="purple">#ff00ff</color>
+    <color name="Magenta">#7f00ff</color>
+    <color name="waterred">#ff007f</color>
+
+    <color name="black">#000001</color>
+    <color name="white">#FFFFFF</color>
+
+
+    <!--主体色调-->
+    <color name="home">#e62129</color>
+    <color name="point_gray">#c0c3c2</color>
+
+    <!--item被点击时的背景色-->
+    <color name="item_pressed">#ebebeb</color>
+    <color name="image_loading">#edeee9</color>
+
+
+    <!--标题栏文字的颜色-->
+    <color name="title">#e62129</color>
+    <color name="text_red">#e62129</color>
+    <color name="text_gray">#999999</color>
+
+    <!--头像边框的红色-->
+    <color name="avatar_Border">#e62129</color>
+
+
+    <!--登录页面-->
+    <color name="login_hint">#e0e0e0</color>
+    <color name="half_transparent_light">#AA000000</color>
+
+    <!--HomeActivity-->
+    <color name="tab_bg">#e62129</color>
+
+    <!--易艺界面-->
+    <color name="mygrey">#F6F6F6</color>
+    <color name="yiyiGuwen_text_bg">#fceaea</color>
+
+
+    <!--接下来是profile设置界面-->
+    <color name="widgets_general_row_pressed">#d9d9d9</color>
+    <color name="widgets_general_row_normal">#ffffff</color>
+    <!--RowView之间那根灰线的颜色-->
+    <color name="widgets_general_row_line">#e5e5e5</color>
+    <!--整个profile界面的背景色-->
+    <color name="general_background">#ffffff</color>
+
+
+    <color name="item_common_pressed">#e0e0e0</color>
+    <color name="item_common_selected">#5e5e5e</color>
+    <color name="item_footer">#e0e0e0</color>
+    <color name="background_common">#f2f1f0</color>
+    <color name="background_player">#fafaf9</color>
+    <color name="background_playlist">#e7e5e2</color>
+    <color name="background_menu_divider">#d0d0d0</color>
+    <color name="background_menu">#e0e0e0</color>
+    <color name="font_default">#222222</color>
+    <color name="font_light">#777777</color>
+    <color name="vlcorange">#ffbb33</color>
+    <color name="darkorange">#ff8800</color>
+    <color name="darkerorange">#ff7200</color>
+
+    <color name="transparent_gray">#8000</color>
+    <color name="transparent_white">#dcfafafa</color>
+    <color name="action_bar_title">#FFFFFF</color>
+    <color name="darkgrey">#ffa0a0a0</color>
+    <color name="background_remote">#ff323232</color>
+
+    <color name="black1">#0f0f0f</color>
+    <color name="black2">#222222</color>
+    <color name="black3">#181818</color>
+
+    <color name="grey1">#393939</color>
+    <color name="grey2">#d0d0d0</color>
+
+    <color name="guillotine_background">#444153</color>
+    <color name="guillotine_background_dark">#383547</color>
+    <color name="selected_item_color">#30d1d5</color>
+
+</resources>

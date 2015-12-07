@@ -1,0 +1,90 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/login_background"
+              android:orientation="vertical">
+
+    <include layout="@layout/login_title"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y10"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.gdxz.zhongbao.client.view.customView.RoundImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/head"/>
+
+        <TextView
+            style="@style/font3_gray_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="大雕"/>
+
+        <com.gdxz.zhongbao.client.view.customView.MyEditText
+            android:id="@+id/et_username"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y40"
+            android:hint="请输入用户名"
+            android:text=""/>
+
+        <com.gdxz.zhongbao.client.view.customView.MyEditText
+            android:id="@+id/et_password"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y40"
+            android:hint="请输入密码"
+            android:inputType="textPassword"
+            android:text=""/>
+
+        <!--验证码  -->
+        <LinearLayout
+            android:id="@+id/ll_veryfyCode"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y40"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            >
+
+            <com.gdxz.zhongbao.client.view.customView.MyEditText
+                android:id="@+id/et_verifyCode"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/y40"
+                android:layout_weight="2"
+                android:hint="请输入验证码"/>
+
+            <ImageView
+                android:id="@+id/iv_verifyCode"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/y40"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_errorInfo"
+            style="@style/font2_white_normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/holo_red_light"/>
+
+        <com.gc.materialdesign.views.ButtonRectangle
+            android:id="@+id/button"
+            android:layout_width="@dimen/x300"
+            android:layout_height="@dimen/y40"
+            android:background="#1E88E5"
+            android:onClick="login"
+            android:text="登录"/>
+        <!--<Button-->
+        <!--style="@style/font2_black_normal"-->
+        <!--android:layout_width="@dimen/x300"-->
+        <!--android:layout_height="@dimen/y30"-->
+        <!--android:layout_marginTop="@dimen/y10"-->
+        <!--android:background="@drawable/btn_change"-->
+        <!--android:gravity="center"-->
+        <!--android:onClick="login"-->
+        <!--android:text="登录"></Button>-->
+    </LinearLayout>
+
+</LinearLayout>

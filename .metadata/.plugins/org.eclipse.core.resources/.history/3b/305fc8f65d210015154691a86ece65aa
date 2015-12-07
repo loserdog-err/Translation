@@ -1,0 +1,75 @@
+package com.chenantao.text;
+
+import android.content.Context;
+import android.util.AttributeSet;
+import android.util.Log;
+import android.view.MotionEvent;
+import android.widget.LinearLayout;
+
+class MyLinearLayout extends LinearLayout
+{
+
+	public MyLinearLayout(Context context, AttributeSet attrs)
+	{
+		super(context, attrs);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public boolean dispatchTouchEvent(MotionEvent ev)
+	{
+		int action = ev.getAction();
+		switch (action)
+		{
+		case MotionEvent.ACTION_DOWN:
+			Log.e("TAG", "parent: dispatchTouchEvent down");
+			break;
+		case MotionEvent.ACTION_MOVE:
+			Log.e("TAG", "parent: dispatchTouchEvent move");
+			break;
+		case MotionEvent.ACTION_UP:
+			Log.e("TAG", "parent: dispatchTouchEvent up");
+			break;
+		}
+		return super.dispatchTouchEvent(ev);
+	}
+
+	@Override
+	public boolean onTouchEvent(MotionEvent event)
+	{
+		int action = event.getAction();
+		switch (action)
+		{
+		case MotionEvent.ACTION_DOWN:
+			Log.e("TAG", "parent: onTouchEvent down");
+			return true;
+		case MotionEvent.ACTION_MOVE:
+			Log.e("TAG", "parent: onTouchEvent move");
+			break;
+		case MotionEvent.ACTION_UP:
+			Log.e("TAG", "parent: onTouchEvent up");
+			return true;
+		}
+		return super.onTouchEvent(event);
+	}
+
+	@Override
+	public boolean onInterceptTouchEvent(MotionEvent ev)
+	{
+		int action = ev.getAction();
+		switch (action)
+		{
+		case MotionEvent.ACTION_DOWN:
+			Log.e("TAG", "parent: onInterceptTouchEvent down");
+			return true;
+		case MotionEvent.ACTION_MOVE:
+			Log.e("TAG", "parent: onInterceptTouchEvent move");
+			break;
+		case MotionEvent.ACTION_UP:
+			Log.e("TAG", "parent: onInterceptTouchEvent up");
+			break;
+		}
+		return super.onInterceptTouchEvent(ev);
+	}
+
+}

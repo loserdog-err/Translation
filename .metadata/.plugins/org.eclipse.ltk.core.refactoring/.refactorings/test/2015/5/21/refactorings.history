@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;styles.xml&apos; to &apos;values&apos;&#x0D;&#x0A;- Original project: &apos;test&apos;&#x0D;&#x0A;- Destination element: &apos;values&apos;&#x0D;&#x0A;- Original element: &apos;styles.xml&apos;" description="Copy file" element1="res/values/styles.xml" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1431977648959" target="/众包翻译/res/values" units="0" version="1.0"/>
+</session>

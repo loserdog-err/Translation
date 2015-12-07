@@ -1,0 +1,60 @@
+package com.chenantao.text;
+
+import android.content.Context;
+import android.util.AttributeSet;
+import android.util.Log;
+import android.view.MotionEvent;
+import android.widget.Button;
+
+public class MyButton extends Button
+{
+
+
+	public MyButton(Context context, AttributeSet attrs)
+	{
+		super(context, attrs);
+	}
+	@Override
+	public boolean dispatchTouchEvent(MotionEvent event)
+	{
+//		getParent().requestDisallowInterceptTouchEvent(true);
+		int action=event.getAction();
+		
+		switch (action)
+		{
+		case MotionEvent.ACTION_DOWN:
+			Log.e("TAG", "dispatchTouchEvent down");
+			break;
+		case MotionEvent.ACTION_MOVE:
+			Log.e("TAG", "dispatchTouchEvent move");
+			break;
+		case MotionEvent.ACTION_UP:
+			Log.e("TAG", "dispatchTouchEvent up");
+			break;
+		default:
+			break;
+		}
+		return super.dispatchTouchEvent(event);
+	}
+	
+	@Override
+	public boolean onTouchEvent(MotionEvent event)
+	{
+		int action=event.getAction();
+		switch (action)
+		{
+		case MotionEvent.ACTION_DOWN:
+			Log.e("TAG", "onTouchEvent down");
+			break;
+		case MotionEvent.ACTION_MOVE:
+			Log.e("TAG", "onTouchEvent move");
+			break;
+		case MotionEvent.ACTION_UP:
+			Log.e("TAG", "onTouchEvent up");
+		default:
+			break;
+		}
+		return super.onTouchEvent(event);
+	}
+
+}

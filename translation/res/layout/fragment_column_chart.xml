@@ -1,0 +1,38 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:gravity="center_horizontal"
+              tools:context="lecho.lib.hellocharts.samples.ColumnChartActivity$PlaceholderFragment">
+
+    <include layout="@layout/common_title"/>
+    <lecho.lib.hellocharts.view.ColumnChartView
+        android:id="@+id/chart"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y280"
+        android:layout_marginTop="@dimen/y20">
+    </lecho.lib.hellocharts.view.ColumnChartView>
+
+
+    <TextView
+        android:layout_marginTop="@dimen/y20"
+        android:id="@+id/tv_today_pay"
+        style="@style/font2_black_bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tv_month_pay"
+        style="@style/font2_black_bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y5"/>
+
+    <TextView
+        android:id="@+id/tv_total_pay"
+        style="@style/font2_black_bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y5"/>
+</LinearLayout>

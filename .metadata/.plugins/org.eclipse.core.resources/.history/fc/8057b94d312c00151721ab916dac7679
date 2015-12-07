@@ -1,0 +1,158 @@
+package com.chen.text1;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
+import cn.jpush.im.android.api.JMessageClient;
+import cn.jpush.im.android.api.callback.CreateGroupCallback;
+import cn.jpush.im.android.api.callback.GetUserInfoCallback;
+import cn.jpush.im.android.api.content.TextContent;
+import cn.jpush.im.android.api.event.MessageEvent;
+import cn.jpush.im.android.api.model.Conversation;
+import cn.jpush.im.android.api.model.Message;
+import cn.jpush.im.android.api.model.UserInfo;
+import cn.jpush.im.api.BasicCallback;
+
+public class MainActivity extends FragmentActivity
+{
+
+	EditText et_username;
+	EditText et_password;
+	EditText et_friend;
+	EditText et_chat_message;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState)
+	{
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+		et_username = (EditText) findViewById(R.id.et_username);
+		et_password = (EditText) findViewById(R.id.et_password);
+		et_friend = (EditText) findViewById(R.id.et_friend);
+		et_chat_message = (EditText) findViewById(R.id.et_chat_message);
+		JMessageClient.registerEventReceiver(new ReciverListener());
+
+	}
+
+	public void regist(View view)
+	{
+		String username = et_username.getText().toString();
+		String password = et_password.getText().toString();
+		Log.e("TAG", "regist: username:" + username + " password:" + password);
+		JMessageClient.register(username, password, new BasicCallback()
+		{
+
+			@Override
+			public void gotResult(int arg0, String arg1)
+			{
+				Log.e("TAG", "注册结果：" + arg0);
+			}
+		});
+	}
+
+	public void login(View view)
+	{
+		final String username = et_username.getText().toString();
+		String password = et_password.getText().toString();
+		Log.e("TAG", "login: username:" + username + " password:" + password);
+		JMessageClient.login(username, password, new BasicCallback()
+		{
+			@Override
+			public void gotResult(final int status, final String desc)
+			{
+				MainActivity.this.runOnUiThread(new Runnable()
+				{
+					@Override
+					public void run()
+					{
+						if (status == 0)
+						{
+							// 后台拿UserInfo
+							JMessageClient.getUserInfo(username, null);
+							Log.e("TAG", "login state:" + status);
+						} else
+						{
+							Log.e("TAG", "status = " + status);
+						}
+					}
+				});
+			}
+		});
+	}
+
+	public void sendMessage(View view)
+	{
+		Message msg=JMessageClient
+				.createSingleTextMessage(et_friend.getText().toString(), et_chat_message.getText().toString());
+		JMessageClient.sendMessage(msg);
+	}
+	public void getUsetInfo(View view)
+	{
+		JMessageClient.getUserInfo(et_username.getText().toString(), new GetUserInfoCallback()
+		{
+			@Override
+			public void gotResult(int state, String arg1, UserInfo userInfo)
+			{
+				if(state==0)
+				{
+					Log.e("TAG", userInfo.getUserName());
+				}else
+				{
+					Log.e("TAG", "state:"+state);
+				}
+			}
+		});
+	}
+	
+	public void deleteConversation(View view)
+	{
+		boolean result=JMessageClient.deleteSingleConversation(et_username.getText().toString());
+		Log.e("TAG", "deleteConversation: "+result);
+	}
+	
+	public void getSingleConversation(View view)
+	{
+		Conversation conversation=JMessageClient.getSingleConversation(et_username.getText().toString());
+		Log.e("TAG", "getSingleConversation:"+conversation.getLatestText());
+	}
+	
+	public void logout(View view)
+	{
+		JMessageClient.logout();
+	}
+	
+	public void createGroup(View view)
+	{
+		JMessageClient.createGroup("大屌组","人不会装逼，那跟咸鱼还有什么区别？",new CreateGroupCallback()
+		{
+			
+			@Override
+			public void gotResult(int responseCode, String responseMsg, long groupId)
+			{
+				if(responseCode==0)
+				{
+					Log.e("TAG", "group id:"+groupId);
+				}
+				else
+				{
+					Log.e("TAG", responseCode+":"+responseMsg);
+				}
+				
+			}
+		});
+	}
+
+	class ReciverListener
+	{
+		public void onEvent(MessageEvent event)
+		{
+			Message msg = event.getMessage();
+			TextContent content = (TextContent) msg.getContent();
+			Log.e("TAG", "接收到消息:" + content.getText());
+		}
+	}
+
+}

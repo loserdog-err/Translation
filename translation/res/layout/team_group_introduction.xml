@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/bg_gray"
+              android:orientation="vertical">
+
+    <include layout="@layout/common_title"/>
+
+    <!--团队名以及团队logo-->
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/x10">
+
+        <ImageView
+            android:id="@+id/iv_group_logo"
+            android:layout_width="@dimen/x30"
+            android:layout_height="@dimen/y30"
+            android:layout_marginLeft="@dimen/x10"
+            android:src="@drawable/team_group_logo"/>
+
+        <TextView
+            android:id="@+id/tv_group_name"
+            style="@style/font2_black_normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x10"
+            android:layout_toRightOf="@id/iv_group_logo"
+            android:text="大雕队"/>
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/lv_group_info"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y200"
+        android:background="@drawable/listview_bg"
+        android:layout_marginTop="@dimen/y5"></ListView>
+
+    <Button
+        android:id="@+id/btn_join_group"
+        android:layout_marginTop="@dimen/y5"
+        android:layout_width="@dimen/x300"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/y25"
+        android:background="@drawable/btn_change"
+        android:onClick="joinTeam"
+        android:text="加入团队"/>
+</LinearLayout>
