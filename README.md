@@ -24,3 +24,7 @@
 编译环境
 ---
 Window10+AndroidStudio+jdk7+SdkVersion21+buildToolsVersion21.1.2
+
+注意
+--
+本项目是一个网络客户端，需要服务器，请自行下载另一个项目Translation_Server对服务器进行部署。
