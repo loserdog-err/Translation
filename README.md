@@ -1,3 +1,13 @@
+![image](https://github.com/Chenantao/Translation/tree/master/pic/1.jpg)
+![image](https://github.com/Chenantao/Translation/tree/master/pic/2.jpg)
+![image](https://github.com/Chenantao/Translation/tree/master/pic/3.jpg)
+![image](https://github.com/Chenantao/Translation/tree/master/pic/4.jpg)
+![image](https://github.com/Chenantao/Translation/tree/master/pic/5.jpg)
+![image](https://github.com/Chenantao/Translation/tree/master/pic/6.jpg)
+![image](https://github.com/Chenantao/Translation/tree/master/pic/7.jpg)
+![image](https://github.com/Chenantao/Translation/tree/master/pic/8.jpg)
+![image](https://github.com/Chenantao/Translation/tree/master/pic/9.jpg)
+
 # Translation
 
 众包翻译是网络社会的社会化翻译生产力，是一种新型的翻译工作方法模式，即通过移动互联网技术海选译员，再由多个人以最短时间合作工作的模式。 
