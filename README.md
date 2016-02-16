@@ -1,12 +1,6 @@
-![image](https://github.com/Chenantao/Translation/tree/master/pic/1.jpg)
-![image](https://github.com/Chenantao/Translation/tree/master/pic/2.jpg)
-![image](https://github.com/Chenantao/Translation/tree/master/pic/3.jpg)
-![image](https://github.com/Chenantao/Translation/tree/master/pic/4.jpg)
-![image](https://github.com/Chenantao/Translation/tree/master/pic/5.jpg)
-![image](https://github.com/Chenantao/Translation/tree/master/pic/6.jpg)
-![image](https://github.com/Chenantao/Translation/tree/master/pic/7.jpg)
-![image](https://github.com/Chenantao/Translation/tree/master/pic/8.jpg)
-![image](https://github.com/Chenantao/Translation/tree/master/pic/9.jpg)
+<img src="https://github.com/Chenantao/Translation/blob/master/pic/1.jpg" width="300" height="500">
+<img src="https://github.com/Chenantao/Translation/blob/master/pic/1.jpg" width="300" height="500">
+
 
 # Translation
 
