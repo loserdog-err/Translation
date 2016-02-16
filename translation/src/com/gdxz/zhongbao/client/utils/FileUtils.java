@@ -1,10 +1,12 @@
 package com.gdxz.zhongbao.client.utils;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Environment;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.UUID;
@@ -147,6 +149,14 @@ public class FileUtils
 		}
 	}
 
+	public static byte[] getCompressBitmapFromFile(String path)
+	{
+		Bitmap bitmap = BitmapFactory.decodeFile(path);
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		bitmap.compress(Bitmap.CompressFormat.JPEG, 20, baos);
+		return baos.toByteArray();
+	}
+
 	/**
 	 * 递归删除目录下的所有文件及子目录下所有文件
 	 *
@@ -176,6 +186,7 @@ public class FileUtils
 
 	/**
 	 * 得到文件的大小
+	 *
 	 * @param f
 	 * @return
 	 * @throws Exception
@@ -189,8 +200,7 @@ public class FileUtils
 			if (files[i].isDirectory())
 			{
 				size = size + getFileSize(files[i]);
-			}
-			else
+			} else
 			{
 				size = size + files[i].length();
 			}

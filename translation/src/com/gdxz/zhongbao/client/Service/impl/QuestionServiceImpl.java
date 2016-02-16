@@ -35,6 +35,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -225,7 +226,12 @@ public class QuestionServiceImpl implements QuestionService
 			{
 				L.e(paths.get(i) + ":path");
 				File file = new File(paths.get(i));
-				params.addBodyParameter(file.getName(), file);
+//				params.addBodyParameter(file.getName(), file);
+				byte[] compressBitmap = FileUtils.getCompressBitmapFromFile(file.getPath
+						());
+				ByteArrayInputStream bais = new ByteArrayInputStream(compressBitmap);
+				params.addBodyParameter(file.getName(), bais, compressBitmap.length, file.getName
+						());
 			}
 		}
 		if (voicePath != null && !("".equals(voicePath)))

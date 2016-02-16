@@ -8,6 +8,8 @@ import android.view.Window;
 import com.bmob.pay.tool.BmobPay;
 import com.gdxz.zhongbao.client.Service.impl.UserServiceImpl;
 import com.gdxz.zhongbao.client.common.MyApplication;
+import com.gdxz.zhongbao.client.utils.L;
+import com.gdxz.zhongbao.client.utils.ScreenUtils;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -20,6 +22,7 @@ public class MainActivity extends Activity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
+		L.e("width:" + ScreenUtils.getScreenHeight(this));
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_main);
 		String currentUserId = UserServiceImpl.getCurrentUserId(this);

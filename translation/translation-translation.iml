@@ -19,7 +19,6 @@
           <task>generateDebugSources</task>
         </afterSyncTasks>
         <option name="ALLOW_USER_CONFIGURATION" value="false" />
-        <option name="RES_FOLDERS_RELATIVE_PATH" value="file://$MODULE_DIR$/res" />
       </configuration>
     </facet>
   </component>
@@ -86,48 +85,48 @@
       <excludeFolder url="file://$MODULE_DIR$/build/outputs" />
       <excludeFolder url="file://$MODULE_DIR$/build/tmp" />
     </content>
-    <orderEntry type="jdk" jdkName="Android API 21 Platform" jdkType="Android SDK" />
+    <orderEntry type="jdk" jdkName="Android API 21 Platform (1)" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="ShareSDK-Wechat-Favorite-2.6.2" level="project" />
+    <orderEntry type="library" exported="" name="gson-2.2.4" level="project" />
     <orderEntry type="library" exported="" name="ShareSDK-Wechat-2.6.2" level="project" />
-    <orderEntry type="library" exported="" name="MaterialDesign-1.4" level="project" />
+    <orderEntry type="library" exported="" name="Native_Libs2" level="project" />
+    <orderEntry type="library" exported="" name="hellocharts-library-1.5.5" level="project" />
+    <orderEntry type="library" exported="" name="MobTools" level="project" />
+    <orderEntry type="library" exported="" name="picasso-2.4.0" level="project" />
+    <orderEntry type="library" exported="" name="support-annotations-22.2.1" level="project" />
+    <orderEntry type="library" exported="" name="ShareSDK-SinaWeibo-2.6.2" level="project" />
     <orderEntry type="library" exported="" name="ShareSDK-Twitter-2.6.2" level="project" />
+    <orderEntry type="library" exported="" name="appcompat-v7-22.2.1" level="project" />
+    <orderEntry type="library" exported="" name="xUtils-2.6.14" level="project" />
+    <orderEntry type="library" exported="" name="MobLogCollector" level="project" />
+    <orderEntry type="library" exported="" name="ShareSDK-Wechat-Core-2.6.2" level="project" />
+    <orderEntry type="library" exported="" name="multiplemodel-1.1.0" level="project" />
+    <orderEntry type="library" exported="" name="library-1.2.1" level="project" />
+    <orderEntry type="library" exported="" name="ShareSDK-TencentWeibo-2.6.2" level="project" />
     <orderEntry type="library" exported="" name="ShareSDK-Email-2.6.2" level="project" />
     <orderEntry type="library" exported="" name="ShareSDK-QZone-2.6.2" level="project" />
-    <orderEntry type="library" exported="" name="ShareSDK-QQ-2.6.2" level="project" />
-    <orderEntry type="library" exported="" name="ldrawer-0.1" level="project" />
-    <orderEntry type="library" exported="" name="universal-image-loader-1.9.4" level="project" />
-    <orderEntry type="library" exported="" name="hellocharts-library-1.5.5" level="project" />
-    <orderEntry type="library" exported="" name="MobLogCollector" level="project" />
-    <orderEntry type="library" exported="" name="ShareSDK-Core-2.6.2" level="project" />
-    <orderEntry type="library" exported="" name="ShareSDK-Facebook-2.6.2" level="project" />
-    <orderEntry type="library" exported="" name="ShareSDK-ShortMessage-2.6.2" level="project" />
-    <orderEntry type="library" exported="" name="ShareSDK-TencentWeibo-2.6.2" level="project" />
-    <orderEntry type="library" exported="" name="ShareSDK-SinaWeibo-2.6.2" level="project" />
-    <orderEntry type="library" exported="" name="alipaysdk" level="project" />
-    <orderEntry type="library" exported="" name="gson-2.2.4" level="project" />
-    <orderEntry type="library" exported="" name="switchbutton-1.2.0" level="project" />
     <orderEntry type="library" exported="" name="alipayutdid" level="project" />
-    <orderEntry type="library" exported="" name="ShareSDK-Wechat-Moments-2.6.2" level="project" />
-    <orderEntry type="library" exported="" name="alipaysecsdk" level="project" />
-    <orderEntry type="library" exported="" name="library-1.2.1" level="project" />
-    <orderEntry type="library" exported="" name="BmobPay_V1.0.2" level="project" />
-    <orderEntry type="library" exported="" name="support-annotations-22.2.1" level="project" />
-    <orderEntry type="library" exported="" name="ShareSDK-Wechat-Core-2.6.2" level="project" />
-    <orderEntry type="library" exported="" name="springindicator-1.0.2" level="project" />
     <orderEntry type="library" exported="" name="httpmime-4.3.5" level="project" />
-    <orderEntry type="library" exported="" name="MobTools" level="project" />
-    <orderEntry type="library" exported="" name="httpcore-4.3.2" level="project" />
+    <orderEntry type="library" exported="" name="switchbutton-1.2.0" level="project" />
+    <orderEntry type="library" exported="" name="BmobPay_V1.0.2" level="project" />
     <orderEntry type="library" exported="" name="support-v4-22.2.1" level="project" />
-    <orderEntry type="library" exported="" name="multiplemodel-1.1.0" level="project" />
-    <orderEntry type="library" exported="" name="xUtils-2.6.14" level="project" />
-    <orderEntry type="library" exported="" name="Native_Libs2" level="project" />
+    <orderEntry type="library" exported="" name="httpcore-4.3.2" level="project" />
+    <orderEntry type="library" exported="" name="alipaysecsdk" level="project" />
+    <orderEntry type="library" exported="" name="ShareSDK-QQ-2.6.2" level="project" />
+    <orderEntry type="library" exported="" name="universal-image-loader-1.9.4" level="project" />
+    <orderEntry type="library" exported="" name="ldrawer-0.1" level="project" />
+    <orderEntry type="library" exported="" name="springindicator-1.0.2" level="project" />
+    <orderEntry type="library" exported="" name="ShareSDK-Wechat-Favorite-2.6.2" level="project" />
+    <orderEntry type="library" exported="" name="ShareSDK-Facebook-2.6.2" level="project" />
+    <orderEntry type="library" exported="" name="ShareSDK-Wechat-Moments-2.6.2" level="project" />
+    <orderEntry type="library" exported="" name="alipaysdk" level="project" />
+    <orderEntry type="library" exported="" name="ShareSDK-ShortMessage-2.6.2" level="project" />
+    <orderEntry type="library" exported="" name="ShareSDK-Core-2.6.2" level="project" />
     <orderEntry type="library" exported="" name="commons-httpclient-3.1" level="project" />
-    <orderEntry type="library" exported="" name="appcompat-v7-22.2.1" level="project" />
-    <orderEntry type="library" exported="" name="picasso-2.4.0" level="project" />
     <orderEntry type="library" exported="" name="jmessage-android-1.1.1" level="project" />
+    <orderEntry type="library" exported="" name="MaterialDesign-1.4" level="project" />
+    <orderEntry type="module" module-name="slide_library" exported="" />
     <orderEntry type="module" module-name="library" exported="" />
     <orderEntry type="module" module-name="guilotine_menu_library" exported="" />
-    <orderEntry type="module" module-name="slide_library" exported="" />
   </component>
 </module>
